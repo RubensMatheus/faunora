@@ -2,6 +2,7 @@ package br.com.faunora.infra.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -34,15 +35,19 @@ public class SecurityConfig {
         http
             .csrf().disable()
             .authorizeRequests()
-                .requestMatchers("/api/usuarios/registrar", "/api/login").permitAll()
-                .anyRequest().authenticated()
+                .requestMatchers("/usuarios/registrar", "/login").permitAll() // Acesso público
+                .requestMatchers(HttpMethod.GET, "/usuarios/**").permitAll() // GET público
+                .requestMatchers(HttpMethod.DELETE, "/usuarios/**").permitAll() // DELETE público
+                .requestMatchers(HttpMethod.PUT, "/usuarios/**").authenticated() // PUT autenticado
+                .anyRequest().authenticated() // Demais endpoints autenticados
             .and()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // Define autenticação stateless
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class); // Adiciona o filtro JWT
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
+
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {

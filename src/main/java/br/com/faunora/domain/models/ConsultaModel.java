@@ -15,9 +15,9 @@ public class ConsultaModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "consulta_id")
-    private UUID id;
+    private Long id;
 
     @JoinColumn(name = "pet_id", nullable = false)
     @ManyToOne

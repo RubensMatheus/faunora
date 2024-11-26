@@ -40,7 +40,7 @@ public class UserService {
         return userRepository.save(userModel);
     }
 
-    public UserModel findById(UUID id) {
+    public UserModel findById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(UsuarioNaoEncontradoException::new);
     }
@@ -56,7 +56,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserModel updateUser(UUID id, UserRecordDto userRecordDto) {
+    public UserModel updateUser(Long id, UserRecordDto userRecordDto) {
         UserModel userModel = userRepository.findById(id)
                 .orElseThrow(UsuarioNaoEncontradoException::new);
 
@@ -70,7 +70,7 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteById(UUID id) {
+    public void deleteById(Long id) {
         UserModel userModel = userRepository.findById(id)
                 .orElseThrow(UsuarioNaoEncontradoException::new);
 

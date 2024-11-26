@@ -13,9 +13,9 @@ public class ReceitaModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "receita_id")
-    private UUID id;
+    private Long id;
 
     @Column(name = "receita_prescricao", nullable = false)
     private String prescricao;

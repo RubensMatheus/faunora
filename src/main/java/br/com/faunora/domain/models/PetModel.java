@@ -16,9 +16,9 @@ public class PetModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pet_id")
-    private UUID id;
+    private Long id;
 
     @Column(name = "pet_nome", nullable = false)
     private String nome;

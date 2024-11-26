@@ -14,9 +14,9 @@ public class LaudoModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "laudo_id")
-    private UUID id;
+    private Long id;
 
     @Column(name = "laudo_descricao", nullable = false)
     private String prescricao;
