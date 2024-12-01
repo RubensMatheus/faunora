@@ -1,5 +1,6 @@
 package br.com.faunora.domain.models;
 
+import br.com.faunora.domain.enums.ProdutoTipo;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,7 +16,8 @@ public class ProdutoModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "produto_id")
+    private UUID id;
 
     @Column(name = "produto_nome", nullable = false, unique = true)
     private String nome;
@@ -28,6 +30,10 @@ public class ProdutoModel implements Serializable {
 
     @Column(name = "produto_descricao", nullable = false)
     private String descricao;
+
+    @Column(name = "produto_categoria", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ProdutoTipo categoria;
 
     /*adicionar imagem de amostragem*/
 }

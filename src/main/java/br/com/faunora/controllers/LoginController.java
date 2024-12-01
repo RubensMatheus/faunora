@@ -1,6 +1,6 @@
 package br.com.faunora.controllers;
 
-import br.com.faunora.domain.dto.LoginDto;
+import br.com.faunora.domain.dto.LoginRequestRecordDto;
 import br.com.faunora.infra.security.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,12 +24,12 @@ public class LoginController {
     private JWTUtils jwtUtils;
 
     @PostMapping
-    public ResponseEntity<Map<String, String>> authenticateUser(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<Map<String, String>> authenticateUser(@RequestBody LoginRequestRecordDto loginRequestRecordDto) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                    loginDto.email(),
-                    loginDto.senha()
+                    loginRequestRecordDto.email(),
+                    loginRequestRecordDto.senha()
                 )
             );
 
@@ -37,7 +37,7 @@ public class LoginController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             // Gera o token JWT
-            String token = jwtUtils.generateToken(loginDto.email());
+            String token = jwtUtils.generateToken(loginRequestRecordDto.email());
 
             // Retorna a resposta com o token
             return ResponseEntity.ok(Map.of(

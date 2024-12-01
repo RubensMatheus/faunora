@@ -1,12 +1,11 @@
 package br.com.faunora.domain.models;
 
-import br.com.faunora.domain.enums.UserType;
+import br.com.faunora.domain.enums.UserTipo;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "tb_users")
@@ -33,7 +32,7 @@ public class UserModel implements Serializable {
 
     @Column(name = "user_tipo", nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserType tipo; // CLIENTE ou VETERINARIO
+    private UserTipo tipo; // CLIENTE ou VETERINARIO
 
     @OneToMany(mappedBy = "tutor", cascade = CascadeType.ALL)
     private List<PetModel> pets;

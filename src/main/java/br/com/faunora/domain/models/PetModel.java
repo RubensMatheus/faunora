@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -18,7 +19,7 @@ public class PetModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pet_id")
-    private Long id;
+    private UUID id;
 
     @Column(name = "pet_nome", nullable = false)
     private String nome;
@@ -40,6 +41,15 @@ public class PetModel implements Serializable {
     @JoinColumn(name = "user_id", nullable = false)
     @ManyToOne
     private UserModel tutor;
+
+    @OneToMany(mappedBy = "paciente")
+    Set<ConsultaModel> consultas;
+
+    @OneToMany(mappedBy = "paciente")
+    Set<ExameModel> exames;
+
+    @OneToMany(mappedBy = "paciente")
+    Set<DosagemModel> dosagens;
 
     /*adicionar foto de perfil*/
 }

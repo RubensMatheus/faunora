@@ -1,6 +1,6 @@
 package br.com.faunora.infra.handlers.custom;
 
-import br.com.faunora.domain.dto.RestErroRecordDto;
+import br.com.faunora.domain.dto.RestMensagemRecordDto;
 import br.com.faunora.infra.exceptions.NenhumPetEncontradoException;
 import br.com.faunora.infra.exceptions.NenhumProdutoEncontradoException;
 import br.com.faunora.infra.exceptions.PetNaoEncontradoException;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class RestCustomExceptionHandler {
     @ExceptionHandler({PetNaoEncontradoException.class, NenhumPetEncontradoException.class, ProdutoNaoEncontradoException.class, NenhumProdutoEncontradoException.class})
-    public ResponseEntity<RestErroRecordDto> handleNotFoundException(RuntimeException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new RestErroRecordDto(HttpStatus.NOT_FOUND, ex.getMessage()));
+    public ResponseEntity<RestMensagemRecordDto> handleNotFoundException(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new RestMensagemRecordDto(ex.getMessage()));
     }
 }
