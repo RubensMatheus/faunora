@@ -22,7 +22,6 @@ import java.util.UUID;
 
 @Service
 public class UserService {
-
     @Autowired
     private UserRepository userRepository;
 
@@ -113,7 +112,6 @@ public class UserService {
     }
 
 
-
     // Método para encontrar o setter correspondente
     private Method findSetter(Class<?> clazz, String fieldName, Class<?> paramType) {
         String setterName = "set" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
@@ -123,7 +121,6 @@ public class UserService {
             return null;
         }
     }
-
 
     @Transactional
     public void deleteById(Long id) {
