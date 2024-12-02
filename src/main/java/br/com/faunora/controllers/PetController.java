@@ -100,4 +100,3 @@ public class PetController {
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("pet deletado com sucesso"));
     }
 }
-
