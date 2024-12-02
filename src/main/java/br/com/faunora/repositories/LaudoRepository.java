@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface LaudoRepository extends JpaRepository<LaudoModel, UUID> {
+public interface LaudoRepository extends JpaRepository<LaudoModel, Long> {
 }
