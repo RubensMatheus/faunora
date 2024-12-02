@@ -37,14 +37,6 @@ public class LaudoService {
     }
 
     @Transactional
-    public void deleteById(Long id) {
-        LaudoModel laudoModel = laudoRepository.findById(id)
-                .orElseThrow(LaudoNaoEncontradoException::new);
-
-        laudoRepository.delete(laudoModel);
-    }
-
-    @Transactional
     public void updateById(Long id, LaudoRecordDto laudoRecordDto) {
         LaudoModel laudoModel = laudoRepository.findById(id)
                 .orElseThrow(LaudoNaoEncontradoException::new);
@@ -57,5 +49,13 @@ public class LaudoService {
         laudoModel.setValidade(laudoRecordDto.validade());
 
         laudoRepository.save(laudoModel);
+    }
+
+    @Transactional
+    public void deleteById(Long id) {
+        LaudoModel laudoModel = laudoRepository.findById(id)
+                .orElseThrow(LaudoNaoEncontradoException::new);
+
+        laudoRepository.delete(laudoModel);
     }
 }

@@ -33,4 +33,8 @@ public class DosagemModel implements Serializable {
 
     @Column(name = "dosagem_hora", nullable = false)
     private Instant hora;
+
+    @JoinColumn(name = "user_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserModel veterinario;
 }

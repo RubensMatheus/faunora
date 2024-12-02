@@ -47,7 +47,7 @@ public class ExameService {
                 .orElseThrow(PetNaoEncontradoException::new);
 
         if (!userModel.getPets().contains(petModel)) {
-            throw new PetNaoEncontradoException();
+            throw new PetNaoEncontradoException("pet não disponível para consulta");
         }
 
         ExameModel exameModel = new ExameModel();
@@ -75,7 +75,7 @@ public class ExameService {
                 .orElseThrow(ExameNaoEncontradoException::new);
 
         if (!userModel.getPets().contains(exameModel.getPaciente())) {
-            throw new PetNaoEncontradoException();
+            throw new PetNaoEncontradoException("pet não disponível para consulta");
         }
 
         return exameModel;
@@ -114,7 +114,7 @@ public class ExameService {
                 .orElseThrow(PetNaoEncontradoException::new);
 
         if (!userModel.getPets().contains(paciente)) {
-            throw new PetNaoEncontradoException();
+            throw new PetNaoEncontradoException("pet não disponível para consulta");
         }
 
         List<ExameModel> exameModels = exameRepository.findAllByPaciente(paciente);
@@ -199,7 +199,7 @@ public class ExameService {
                 .orElseThrow(ExameNaoEncontradoException::new);
 
         PetModel petModel = petRepository.findById(exameRecordDto.pacienteId())
-                .orElseThrow(PetNaoEncontradoException::new);
+                .orElseThrow(() -> new PetNaoEncontradoException("pet não disponível para consulta"));
 
         if (!userModel.getPets().contains(petModel)) {
             throw new PetNaoEncontradoException();
@@ -226,7 +226,7 @@ public class ExameService {
                 .orElseThrow(ExameNaoEncontradoException::new);
 
         if (!userModel.getPets().contains(exameModel.getPaciente())) {
-            throw new PetNaoEncontradoException();
+            throw new PetNaoEncontradoException("pet não disponível para consulta");
         }
 
         exameRepository.delete(exameModel);

@@ -1,3 +1,18 @@
-spring.application.name=faunora
+spring:
+  application:
+    name: faunora
 
-app.
+api:
+  services:
+    time:
+      duration: 30
+    morning:
+      start:
+        time: 8
+      ending:
+        time: 12
+    afternoon:
+      start:
+        time: 14
+      ending:
+        time: 18
