@@ -37,4 +37,8 @@ public class ExameModel implements Serializable {
     @JoinColumn(name = "laudo_id")
     @OneToOne(cascade = CascadeType.ALL)
     private LaudoModel laudo;
+
+    @JoinColumn(name = "user_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserModel veterinario;
 }

@@ -11,6 +11,6 @@ import java.util.List;
 
 @Repository
 public interface ExameRepository extends JpaRepository<ExameModel, Long> {
-    List<ExameModel> findAllByTipo(ExameTipo categoria);
+    List<ExameModel> findAllByTipoAndPaciente(ExameTipo tipo, PetModel paciente);
     List<ExameModel> findAllByPaciente(PetModel paciente);
 }
