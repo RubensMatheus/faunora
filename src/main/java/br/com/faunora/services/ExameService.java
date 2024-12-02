@@ -3,17 +3,13 @@ package br.com.faunora.services;
 import br.com.faunora.domain.dto.ExameRecordDto;
 import br.com.faunora.domain.enums.ExameTipo;
 import br.com.faunora.domain.models.ExameModel;
-import br.com.faunora.domain.models.LaudoModel;
 import br.com.faunora.domain.models.PetModel;
 import br.com.faunora.infra.exceptions.ExameNaoEncontradoException;
-import br.com.faunora.infra.exceptions.LaudoNaoEncontradoException;
 import br.com.faunora.infra.exceptions.NenhumExameEncontradoException;
 import br.com.faunora.infra.exceptions.PetNaoEncontradoException;
 import br.com.faunora.repositories.ExameRepository;
-import br.com.faunora.repositories.LaudoRepository;
 import br.com.faunora.repositories.PetRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,19 +25,13 @@ public class ExameService {
     private ExameRepository exameRepository;
     @Autowired
     private PetRepository petRepository;
-    @Autowired
-    private LaudoRepository laudoRepository;
 
     @Transactional
     public void saveExame(ExameRecordDto exameRecordDto) {
-        LaudoModel laudoModel = laudoRepository.findById(exameRecordDto.laudoId())
-                .orElseThrow(LaudoNaoEncontradoException::new);
-
         PetModel petModel = petRepository.findById(exameRecordDto.pacienteId())
                 .orElseThrow(PetNaoEncontradoException::new);
 
         ExameModel exameModel = new ExameModel();
-        exameModel.setLaudo(laudoModel);
         exameModel.setPaciente(petModel);
         exameModel.setTipo(exameRecordDto.tipo());
         exameModel.setData(exameRecordDto.data());
@@ -133,13 +123,9 @@ public class ExameService {
         ExameModel exameModel = exameRepository.findById(id)
                 .orElseThrow(ExameNaoEncontradoException::new);
 
-        LaudoModel laudoModel = laudoRepository.findById(exameRecordDto.laudoId())
-                .orElseThrow(LaudoNaoEncontradoException::new);
-
         PetModel petModel = petRepository.findById(exameRecordDto.pacienteId())
                 .orElseThrow(PetNaoEncontradoException::new);
 
-        exameModel.setLaudo(laudoModel);
         exameModel.setPaciente(petModel);
         exameModel.setTipo(exameRecordDto.tipo());
         exameModel.setData(exameRecordDto.data());

@@ -11,7 +11,6 @@ public record ExameRecordDto(
         @NotNull UUID pacienteId,
         @NotNull ExameTipo tipo,
         @NotNull LocalDate data,
-        @NotNull Instant hora,
-        @NotNull Long laudoId
+        @NotNull Instant hora
         ) {
 }

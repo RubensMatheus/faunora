@@ -34,7 +34,7 @@ public class ExameModel implements Serializable {
     @Column(name = "exame_hora", nullable = false)
     private Instant hora;
 
-    @JoinColumn(name = "laudo_id", nullable = false)
+    @JoinColumn(name = "laudo_id")
     @OneToOne(cascade = CascadeType.ALL)
     private LaudoModel laudo;
 }
