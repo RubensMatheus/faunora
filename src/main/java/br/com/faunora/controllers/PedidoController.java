@@ -1,7 +1,6 @@
 package br.com.faunora.controllers;
 
 import br.com.faunora.domain.dto.PedidoRecordDto;
-import br.com.faunora.domain.dto.ProdutoRecordDto;
 import br.com.faunora.domain.dto.RestMensagemRecordDto;
 import br.com.faunora.domain.dto.UpdatePedidoRecordDto;
 import br.com.faunora.domain.models.PedidoModel;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/pedidos")
@@ -27,7 +25,7 @@ public class PedidoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PedidoModel> getPedidoById(@PathVariable UUID id) {
+    public ResponseEntity<PedidoModel> getPedidoById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(pedidoService.findById(id));
     }
 
@@ -37,19 +35,19 @@ public class PedidoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RestMensagemRecordDto> updatePedido(@PathVariable UUID id, @RequestBody UpdatePedidoRecordDto updatePedidoRecordDto) {
+    public ResponseEntity<RestMensagemRecordDto> updatePedido(@PathVariable Long id, @RequestBody UpdatePedidoRecordDto updatePedidoRecordDto) {
         pedidoService.updatePedido(id, updatePedidoRecordDto);
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("pedido atualizado com sucesso"));
     }
 
     @PatchMapping("cancelar/{id}")
-    public ResponseEntity<RestMensagemRecordDto> cancelarPedido(@PathVariable UUID id) {
+    public ResponseEntity<RestMensagemRecordDto> cancelarPedido(@PathVariable Long id) {
         pedidoService.cancelarPedido(id);
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("pedido cancelado com sucesso"));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<RestMensagemRecordDto> deletePedidoById(@PathVariable UUID id) {
+    public ResponseEntity<RestMensagemRecordDto> deletePedidoById(@PathVariable Long id) {
         pedidoService.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("pedido deletado com sucesso"));
     }

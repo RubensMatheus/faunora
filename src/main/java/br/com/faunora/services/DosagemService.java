@@ -3,7 +3,6 @@ package br.com.faunora.services;
 import br.com.faunora.domain.dto.DosagemRecordDto;
 import br.com.faunora.domain.enums.DosagemTipo;
 import br.com.faunora.domain.models.DosagemModel;
-import br.com.faunora.domain.models.ExameModel;
 import br.com.faunora.domain.models.PetModel;
 import br.com.faunora.infra.exceptions.DosagemNaoEncontradaException;
 import br.com.faunora.infra.exceptions.NenhumaDosagemEncontradaException;
@@ -18,7 +17,6 @@ import java.time.LocalDate;
 import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class DosagemService {
@@ -56,7 +54,7 @@ public class DosagemService {
         return dosagemModels;
     }
 
-    public List<DosagemModel> findAllByPaciente(UUID pacienteId) {
+    public List<DosagemModel> findAllByPaciente(Long pacienteId) {
         PetModel paciente = petRepository.findById(pacienteId)
                 .orElseThrow(PetNaoEncontradoException::new);
 

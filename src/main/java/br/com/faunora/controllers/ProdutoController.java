@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/produtos")
@@ -26,7 +25,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProdutoModel> getProdutoById(@PathVariable UUID id) {
+    public ResponseEntity<ProdutoModel> getProdutoById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(produtoService.findById(id));
     }
 
@@ -46,13 +45,13 @@ public class ProdutoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RestMensagemRecordDto> updateProduto(@PathVariable UUID id, @RequestBody ProdutoRecordDto produtoRecordDto) {
+    public ResponseEntity<RestMensagemRecordDto> updateProduto(@PathVariable Long id, @RequestBody ProdutoRecordDto produtoRecordDto) {
         produtoService.updateProduto(id, produtoRecordDto);
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("produto atualizado com sucesso"));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<RestMensagemRecordDto> deleteById(@PathVariable UUID id) {
+    public ResponseEntity<RestMensagemRecordDto> deleteById(@PathVariable Long id) {
         produtoService.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("produto deletado com sucesso"));
     }

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class ProdutoService {
@@ -29,7 +28,7 @@ public class ProdutoService {
         produtoRepository.save(produtoModel);
     }
 
-    public ProdutoModel findById(UUID id) {
+    public ProdutoModel findById(Long id) {
         return produtoRepository.findById(id)
                 .orElseThrow(ProdutoNaoEncontradoException::new);
     }
@@ -71,7 +70,7 @@ public class ProdutoService {
     }
 
     @Transactional
-    public void updateProduto(UUID id, ProdutoRecordDto produtoRecordDto) {
+    public void updateProduto(Long id, ProdutoRecordDto produtoRecordDto) {
         ProdutoModel produtoModel = produtoRepository.findById(id)
                 .orElseThrow(ProdutoNaoEncontradoException::new);
 
@@ -80,7 +79,7 @@ public class ProdutoService {
     }
 
     @Transactional
-    public void deleteById(UUID id) {
+    public void deleteById(Long id) {
         ProdutoModel produtoModel = produtoRepository.findById(id)
                 .orElseThrow(ProdutoNaoEncontradoException::new);
 

@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class PedidoService {
@@ -40,7 +39,7 @@ public class PedidoService {
         pedidoRepository.save(pedidoModel);
     }
 
-    public PedidoModel findById(UUID id) {
+    public PedidoModel findById(Long id) {
         return pedidoRepository.findById(id)
                 .orElseThrow(PedidoNaoEncontradoException::new);
     }
@@ -56,7 +55,7 @@ public class PedidoService {
     }
 
     @Transactional
-    public void updatePedido(UUID id, UpdatePedidoRecordDto updatePedidoRecordDto) {
+    public void updatePedido(Long id, UpdatePedidoRecordDto updatePedidoRecordDto) {
         PedidoModel pedidoModel = pedidoRepository.findById(id)
                 .orElseThrow(PedidoNaoEncontradoException::new);
 
@@ -69,7 +68,7 @@ public class PedidoService {
     }
 
     @Transactional
-    public void cancelarPedido(UUID id) {
+    public void cancelarPedido(Long id) {
         PedidoModel pedidoModel = pedidoRepository.findById(id)
                 .orElseThrow(PedidoNaoEncontradoException::new);
 
@@ -79,7 +78,7 @@ public class PedidoService {
     }
 
     @Transactional
-    public void deleteById(UUID id) {
+    public void deleteById(Long id) {
         PedidoModel pedidoModel = pedidoRepository.findById(id)
                 .orElseThrow(PedidoNaoEncontradoException::new);
 

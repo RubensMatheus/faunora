@@ -20,7 +20,6 @@ import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class PetService {
@@ -49,7 +48,7 @@ public class PetService {
         petRepository.save(petModel);
     }
 
-    public PetModel findById(UUID id) {
+    public PetModel findById(Long id) {
         return petRepository.findById(id)
                 .orElseThrow(PetNaoEncontradoException::new);
     }
@@ -171,7 +170,7 @@ public class PetService {
     }
 
     @Transactional
-    public void updatePet(UUID id, PetRecordDto petRecordDto) {
+    public void updatePet(Long id, PetRecordDto petRecordDto) {
         PetModel petModel = petRepository.findById(id)
                 .orElseThrow(PetNaoEncontradoException::new);
 
@@ -190,7 +189,7 @@ public class PetService {
     }
 
     @Transactional
-    public void updatePetNome(UUID id, String nome) {
+    public void updatePetNome(Long id, String nome) {
         PetModel petModel = petRepository.findById(id)
                 .orElseThrow(PetNaoEncontradoException::new);
 
@@ -198,7 +197,7 @@ public class PetService {
     }
 
     @Transactional
-    public void updatePetTipo(UUID id, PetTipo tipo) {
+    public void updatePetTipo(Long id, PetTipo tipo) {
         PetModel petModel = petRepository.findById(id)
                 .orElseThrow(PetNaoEncontradoException::new);
 
@@ -206,7 +205,7 @@ public class PetService {
     }
 
     @Transactional
-    public void updatePetPeso(UUID id, Double peso) {
+    public void updatePetPeso(Long id, Double peso) {
         PetModel petModel = petRepository.findById(id)
                 .orElseThrow(PetNaoEncontradoException::new);
 
@@ -214,7 +213,7 @@ public class PetService {
     }
 
     @Transactional
-    public void updatePetSexo(UUID id, PetSexo sexo) {
+    public void updatePetSexo(Long id, PetSexo sexo) {
         PetModel petModel = petRepository.findById(id)
                 .orElseThrow(PetNaoEncontradoException::new);
 
@@ -222,7 +221,7 @@ public class PetService {
     }
 
     @Transactional
-    public void updatePetNascimento(UUID id, LocalDate nascimento) {
+    public void updatePetNascimento(Long id, LocalDate nascimento) {
         PetModel petModel = petRepository.findById(id)
                 .orElseThrow(PetNaoEncontradoException::new);
 
@@ -230,7 +229,7 @@ public class PetService {
     }
 
     @Transactional
-    public void deleteById(UUID id) {
+    public void deleteById(Long id) {
         PetModel petModel = petRepository.findById(id)
                 .orElseThrow(PetNaoEncontradoException::new);
 

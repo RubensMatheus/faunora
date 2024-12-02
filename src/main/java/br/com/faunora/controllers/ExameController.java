@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/exames")
@@ -56,7 +55,7 @@ public class ExameController {
     }
 
     @GetMapping("/paciente/{id}")
-    public ResponseEntity<List<ExameModel>> getAllByPaciente(@PathVariable UUID id) {
+    public ResponseEntity<List<ExameModel>> getAllByPaciente(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(exameService.findAllByPaciente(id));
     }
 

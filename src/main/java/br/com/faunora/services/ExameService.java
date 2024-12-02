@@ -23,7 +23,6 @@ import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 @Service
 public class ExameService {
@@ -102,7 +101,7 @@ public class ExameService {
         return exameModels;
     }
 
-    public List<ExameModel> findAllByPaciente(UUID pacienteId) {
+    public List<ExameModel> findAllByPaciente(Long pacienteId) {
         if (SecurityContextHolder.getContext().getAuthentication() == null) {
             throw new UsuarioNaoEncontradoException();
         }

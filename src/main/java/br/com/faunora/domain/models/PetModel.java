@@ -8,7 +8,6 @@ import lombok.Data;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "tb_pets")
@@ -19,7 +18,7 @@ public class PetModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pet_id")
-    private UUID id;
+    private Long id;
 
     @Column(name = "pet_nome", nullable = false)
     private String nome;

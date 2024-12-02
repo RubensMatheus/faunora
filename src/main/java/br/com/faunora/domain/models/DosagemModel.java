@@ -7,7 +7,6 @@ import lombok.Data;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Entity
 @Table(name = "tb_dosagens")

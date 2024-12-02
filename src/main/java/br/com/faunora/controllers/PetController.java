@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/pets")
@@ -30,7 +29,7 @@ public class PetController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PetModel> getPetById(@PathVariable UUID id) {
+    public ResponseEntity<PetModel> getPetById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(petService.findById(id));
     }
 
@@ -60,43 +59,43 @@ public class PetController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RestMensagemRecordDto> updatePet(@PathVariable UUID id, @RequestBody PetRecordDto petRecordDto) {
+    public ResponseEntity<RestMensagemRecordDto> updatePet(@PathVariable Long id, @RequestBody PetRecordDto petRecordDto) {
         petService.updatePet(id, petRecordDto);
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("pet atualizado com sucesso"));
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<RestMensagemRecordDto> updatePetNome(@PathVariable UUID id, @RequestParam String nome) {
+    @PatchMapping("/nome/{id}")
+    public ResponseEntity<RestMensagemRecordDto> updatePetNome(@PathVariable Long id, @RequestParam String nome) {
         petService.updatePetNome(id, nome);
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("nome do pet atualizado com sucesso"));
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<RestMensagemRecordDto> updatePetSexo(@PathVariable UUID id, @RequestParam PetSexo sexo) {
+    @PatchMapping("/sexo/{id}")
+    public ResponseEntity<RestMensagemRecordDto> updatePetSexo(@PathVariable Long id, @RequestParam PetSexo sexo) {
         petService.updatePetSexo(id, sexo);
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("sexo do pet atualizado com sucesso"));
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<RestMensagemRecordDto> updatePetTipo(@PathVariable UUID id, @RequestParam PetTipo tipo) {
+    @PatchMapping("/tipo/{id}")
+    public ResponseEntity<RestMensagemRecordDto> updatePetTipo(@PathVariable Long id, @RequestParam PetTipo tipo) {
         petService.updatePetTipo(id, tipo);
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("espécie do pet atualizado com sucesso"));
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<RestMensagemRecordDto> updatePetPeso(@PathVariable UUID id, @RequestParam double peso) {
+    @PatchMapping("/peso/{id}")
+    public ResponseEntity<RestMensagemRecordDto> updatePetPeso(@PathVariable Long id, @RequestParam double peso) {
         petService.updatePetPeso(id, peso);
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("peso do pet atualizado com sucesso"));
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<RestMensagemRecordDto> updatePetNascimento(@PathVariable UUID id, @RequestParam LocalDate nascimento) {
+    @PatchMapping("/data-nasc/{id}")
+    public ResponseEntity<RestMensagemRecordDto> updatePetNascimento(@PathVariable Long id, @RequestParam LocalDate nascimento) {
         petService.updatePetNascimento(id, nascimento);
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("data de nascimento do pet atualizado com sucesso"));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<RestMensagemRecordDto> deleteById(@PathVariable UUID id) {
+    public ResponseEntity<RestMensagemRecordDto> deleteById(@PathVariable Long id) {
         petService.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("pet deletado com sucesso"));
     }
