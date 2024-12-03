@@ -5,6 +5,7 @@ import br.com.faunora.domain.dto.RestMensagemRecordDto;
 import br.com.faunora.domain.enums.ExameTipo;
 import br.com.faunora.domain.models.ExameModel;
 import br.com.faunora.services.ExameService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class ExameController {
     private ExameService exameService;
 
     @PostMapping
-    public ResponseEntity<RestMensagemRecordDto> saveExame(@RequestBody ExameRecordDto exameRecordDto) {
+    public ResponseEntity<RestMensagemRecordDto> saveExame(@RequestBody @Valid ExameRecordDto exameRecordDto) {
         exameService.saveExame(exameRecordDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(new RestMensagemRecordDto("exame criado com sucesso"));
     }
@@ -60,7 +61,7 @@ public class ExameController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RestMensagemRecordDto> updateExame(@PathVariable Long id, @RequestBody ExameRecordDto exameRecordDto) {
+    public ResponseEntity<RestMensagemRecordDto> updateExame(@PathVariable Long id, @RequestBody @Valid ExameRecordDto exameRecordDto) {
         exameService.updateExame(id, exameRecordDto);
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("exame atualizado com sucesso"));
     }

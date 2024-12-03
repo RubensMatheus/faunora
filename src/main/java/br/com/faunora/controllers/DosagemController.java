@@ -5,6 +5,7 @@ import br.com.faunora.domain.dto.RestMensagemRecordDto;
 import br.com.faunora.domain.enums.DosagemTipo;
 import br.com.faunora.domain.models.DosagemModel;
 import br.com.faunora.services.DosagemService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class DosagemController {
     private DosagemService dosagemService;
 
     @PostMapping
-    public ResponseEntity<RestMensagemRecordDto> saveDosagem(@RequestBody DosagemRecordDto dosagemRecordDto) {
+    public ResponseEntity<RestMensagemRecordDto> saveDosagem(@RequestBody @Valid DosagemRecordDto dosagemRecordDto) {
         dosagemService.saveDosagem(dosagemRecordDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(new RestMensagemRecordDto("dosagem criada com sucesso"));
     }
@@ -60,7 +61,7 @@ public class DosagemController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RestMensagemRecordDto> updateDosagem(@PathVariable Long id, @RequestBody DosagemRecordDto dosagemRecordDto) {
+    public ResponseEntity<RestMensagemRecordDto> updateDosagem(@PathVariable Long id, @RequestBody @Valid DosagemRecordDto dosagemRecordDto) {
         dosagemService.updateDosagem(id, dosagemRecordDto);
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("dosagem atualizada com sucesso"));
     }

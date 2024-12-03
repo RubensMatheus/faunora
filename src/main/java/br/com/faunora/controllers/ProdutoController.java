@@ -5,6 +5,7 @@ import br.com.faunora.domain.dto.RestMensagemRecordDto;
 import br.com.faunora.domain.enums.ProdutoTipo;
 import br.com.faunora.domain.models.ProdutoModel;
 import br.com.faunora.services.ProdutoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @PostMapping
-    public ResponseEntity<RestMensagemRecordDto> saveProduto(@RequestBody ProdutoRecordDto produtoRecordDto) {
+    public ResponseEntity<RestMensagemRecordDto> saveProduto(@RequestBody @Valid ProdutoRecordDto produtoRecordDto) {
         produtoService.saveProduto(produtoRecordDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(new RestMensagemRecordDto("produto criado com sucesso"));
     }
@@ -45,7 +46,7 @@ public class ProdutoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RestMensagemRecordDto> updateProduto(@PathVariable Long id, @RequestBody ProdutoRecordDto produtoRecordDto) {
+    public ResponseEntity<RestMensagemRecordDto> updateProduto(@PathVariable Long id, @RequestBody @Valid ProdutoRecordDto produtoRecordDto) {
         produtoService.updateProduto(id, produtoRecordDto);
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("produto atualizado com sucesso"));
     }

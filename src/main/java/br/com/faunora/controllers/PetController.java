@@ -3,6 +3,7 @@ package br.com.faunora.controllers;
 import br.com.faunora.domain.dto.RestMensagemRecordDto;
 import br.com.faunora.domain.enums.PetSexo;
 import br.com.faunora.domain.enums.PetTipo;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.faunora.domain.dto.PetRecordDto;
@@ -23,7 +24,7 @@ public class PetController {
     private PetService petService;
 
     @PostMapping
-    public ResponseEntity<RestMensagemRecordDto> savePet(@RequestBody PetRecordDto petRecordDto) {
+    public ResponseEntity<RestMensagemRecordDto> savePet(@RequestBody @Valid PetRecordDto petRecordDto) {
         petService.savePet(petRecordDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(new RestMensagemRecordDto("pet criado com sucesso"));
     }
@@ -59,7 +60,7 @@ public class PetController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RestMensagemRecordDto> updatePet(@PathVariable Long id, @RequestBody PetRecordDto petRecordDto) {
+    public ResponseEntity<RestMensagemRecordDto> updatePet(@PathVariable Long id, @RequestBody @Valid PetRecordDto petRecordDto) {
         petService.updatePet(id, petRecordDto);
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("pet atualizado com sucesso"));
     }

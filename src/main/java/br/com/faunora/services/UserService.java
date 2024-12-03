@@ -1,25 +1,23 @@
 package br.com.faunora.services;
 
-import br.com.faunora.domain.dto.UpdateUserNameRecordDto;
-import br.com.faunora.domain.dto.UpdateUserPasswordRecordDto;
-import br.com.faunora.domain.dto.UserRecordDto;
+import br.com.faunora.domain.dto.*;
 import br.com.faunora.domain.models.UserModel;
 import br.com.faunora.infra.exceptions.*;
-import br.com.faunora.infra.security.JWTUtils;
+import br.com.faunora.infra.security.TokenService;
 import br.com.faunora.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -28,13 +26,15 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
-    private JWTUtils jwtUtils;
+    private TokenService tokenService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private EmailService emailService;
 
     @Transactional
-    public UserModel saveUser(UserRecordDto userRecordDto) {
-        if (userRepository.existsByEmail(userRecordDto.email())) {
-            throw new EmailNaoDisponivelException();
-        }
+    public void saveUser(UserRecordDto userRecordDto) {
+        verificarEmailValido(userRecordDto.email());
 
         if (!userRecordDto.senha().equals(userRecordDto.confirmarSenha())) {
             throw new SenhasNaoCoincidemException();
@@ -44,7 +44,19 @@ public class UserService {
         BeanUtils.copyProperties(userRecordDto, userModel);
         userModel.setSenha(passwordEncoder.encode(userRecordDto.senha()));
 
-        return userRepository.save(userModel);
+        userRepository.save(userModel);
+    }
+
+    public LoginResponseRecordDto validateUser(LoginRequestRecordDto loginRequestRecordDto) {
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequestRecordDto.email(), loginRequestRecordDto.senha()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        UserModel userModel = userRepository.findByEmail(loginRequestRecordDto.email())
+                .orElseThrow(UsuarioNaoEncontradoException::new);
+
+        String token = tokenService.generateToken(userModel);
+
+        return new LoginResponseRecordDto("login realizado com sucesso", token);
     }
 
     public UserModel findById(Long id) {
@@ -63,68 +75,34 @@ public class UserService {
     }
 
     @Transactional
-    public Map<String, Object> updateUser(Long id, UserRecordDto userRecordDto) {
+    public UpdateUserResponseRecordDto updateUser(Long id, UserRecordDto userRecordDto) {
         UserModel userModel = userRepository.findById(id)
-                .orElseThrow(() -> new UsuarioNaoEncontradoException());
+                .orElseThrow(UsuarioNaoEncontradoException::new);
 
-        // Iterar sobre todos os campos do DTO
-        for (Field field : userRecordDto.getClass().getDeclaredFields()) {
-            field.setAccessible(true); // Permite acessar campos privados
-            try {
-                // Verifica se o campo no DTO não é nulo
-                Object value = field.get(userRecordDto);
-                if (value != null && !(value instanceof String && ((String) value).isBlank())) {
-                    String fieldName = field.getName();
+        verificarEmailValido(userRecordDto.email());
 
-                    if ("senha".equals(fieldName)) {
-                        // Tratamento especial para senha
-                        String encodedPassword = passwordEncoder.encode(value.toString());
-                        Method setter = findSetter(userModel.getClass(), fieldName, String.class);
-                        if (setter != null) {
-                            setter.invoke(userModel, encodedPassword);
-                        }
-                    } else {
-                        // Atualiza outros campos
-                        Method setter = findSetter(userModel.getClass(), fieldName, field.getType());
-                        if (setter != null) {
-                            setter.invoke(userModel, value);
-                        }
-                    }
-                }
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                throw new RuntimeException("Erro ao atualizar o campo: " + field.getName(), e);
-            }
-        }
+        userModel.setEmail(userRecordDto.email());
+        userModel.setSenha(passwordEncoder.encode(userRecordDto.senha()));
+        userModel.setNome(userRecordDto.nome());
+        userModel.setSobrenome(userRecordDto.sobrenome());
+        userModel.setTipo(userRecordDto.tipo());
 
-        // Salva o usuário atualizado
         userRepository.save(userModel);
 
-        // Gera um novo token JWT baseado no email atualizado (ou existente)
-        String newToken = jwtUtils.generateToken(userModel.getEmail());
+        String token = tokenService.generateToken(userModel);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        // Retorna um mapa com o usuário atualizado e o novo token
-        Map<String, Object> response = new HashMap<>();
-        response.put("user", userModel);
-        response.put("token", newToken);
-
-        return response;
-    }
-
-
-    // Método para encontrar o setter correspondente
-    private Method findSetter(Class<?> clazz, String fieldName, Class<?> paramType) {
-        String setterName = "set" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
-        try {
-            return clazz.getMethod(setterName, paramType);
-        } catch (NoSuchMethodException e) {
-            return null;
+        if (authentication != null && Objects.equals(authentication.getName(), userModel.getEmail())) {
+            Authentication newAuthentication = new UsernamePasswordAuthenticationToken(userModel, null, userModel.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(newAuthentication);
         }
+
+        return new UpdateUserResponseRecordDto(userModel.getEmail(), token);
     }
 
     @Transactional
-    public void updateSenha(Long id, UpdateUserPasswordRecordDto updateUserPasswordRecordDto) {
-        UserModel userModel = userRepository.findById(id)
-                .orElseThrow(UsuarioNaoEncontradoException::new);
+    public UpdateUserResponseRecordDto updateSenha(UpdateUserPasswordRecordDto updateUserPasswordRecordDto) {
+        UserModel userModel = recuperarUsuarioLogado();
 
         if (!passwordEncoder.matches(updateUserPasswordRecordDto.senhaAtual(), userModel.getSenha())) {
             throw new CredenciaisInvalidasException("senha atual incorreta");
@@ -135,21 +113,86 @@ public class UserService {
         }
 
         userModel.setSenha(passwordEncoder.encode(updateUserPasswordRecordDto.senhaNova()));
-
         userRepository.save(userModel);
+
+        String token = tokenService.generateToken(userModel);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && Objects.equals(authentication.getName(), userModel.getEmail())) {
+            Authentication newAuthentication = new UsernamePasswordAuthenticationToken(userModel, null, userModel.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+        }
+
+        return new UpdateUserResponseRecordDto(userModel.getEmail(), token);
     }
 
     @Transactional
-    public void updateNome(Long id, UpdateUserNameRecordDto updateUserNameRecordDto) {
-        UserModel userModel = userRepository.findById(id)
-                .orElseThrow(UsuarioNaoEncontradoException::new);
+    public UpdateUserResponseRecordDto updateNome(UpdateUserNameRecordDto updateUserNameRecordDto) {
+        UserModel userModel = recuperarUsuarioLogado();
 
         if (!passwordEncoder.matches(updateUserNameRecordDto.senhaAtual(), userModel.getSenha())) {
-            throw new CredenciaisInvalidasException("senha atual incorreta");
+            throw new CredenciaisInvalidasException("senha fornecida incorreta");
         }
 
         userModel.setNome(updateUserNameRecordDto.novoNome());
         userModel.setSobrenome(updateUserNameRecordDto.novoSobrenome());
+
+        userRepository.save(userModel);
+
+        String token = tokenService.generateToken(userModel);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && Objects.equals(authentication.getName(), userModel.getEmail())) {
+            Authentication newAuthentication = new UsernamePasswordAuthenticationToken(userModel, null, userModel.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+        }
+
+        return new UpdateUserResponseRecordDto(userModel.getEmail(), token);
+    }
+
+    @Transactional
+    public UpdateUserResponseRecordDto updateEmail(UpdateUserEmailRecordDto updateUserEmailRecordDto) {
+        UserModel userModel = recuperarUsuarioLogado();
+
+        if (!passwordEncoder.matches(updateUserEmailRecordDto.senha(), userModel.getSenha())) {
+            throw new CredenciaisInvalidasException("senha fornecida incorreta");
+        }
+
+        userModel.setEmail(updateUserEmailRecordDto.novoEmail());
+
+        userRepository.save(userModel);
+
+        String token = tokenService.generateToken(userModel);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && Objects.equals(authentication.getName(), userModel.getEmail())) {
+            Authentication newAuthentication = new UsernamePasswordAuthenticationToken(userModel, null, userModel.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+        }
+
+        return new UpdateUserResponseRecordDto(userModel.getEmail(), token);
+    }
+
+    public void esqueceuSenha(String email) {
+        UserModel userModel = userRepository.findByEmail(email)
+                .orElseThrow(UsuarioNaoEncontradoException::new);
+
+        String resetToken = tokenService.generateToken(userModel);
+        emailService.sendPasswordResetEmail(userModel.getEmail(), resetToken);
+    }
+
+    @Transactional
+    public void redefinirSenha(ResetPasswordRecordDto resetPasswordRecordDto) {
+        if (!resetPasswordRecordDto.novaSenha().equals(resetPasswordRecordDto.confirmaNovaSenha())) {
+            throw new SenhasNaoCoincidemException();
+        }
+
+        String login = tokenService.verifyToken(resetPasswordRecordDto.token());
+
+        UserModel userModel = userRepository.findByEmail(login)
+                .orElseThrow(UsuarioNaoEncontradoException::new);
+
+        userModel.setSenha(passwordEncoder.encode(resetPasswordRecordDto.novaSenha()));
 
         userRepository.save(userModel);
     }
@@ -159,6 +202,21 @@ public class UserService {
         UserModel userModel = userRepository.findById(id)
                 .orElseThrow(UsuarioNaoEncontradoException::new);
 
-        userRepository.delete(userModel);
+        userRepository.deleteById(id);
+    }
+
+    public void verificarEmailValido(String email) {
+        if (userRepository.findByEmail(email).isPresent()) {
+            throw new EmailNaoDisponivelException();
+        }
+    }
+
+    public UserModel recuperarUsuarioLogado() {
+        if (SecurityContextHolder.getContext().getAuthentication() == null) {
+            throw new UsuarioNaoEncontradoException();
+        }
+
+        return userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName())
+                .orElseThrow(UsuarioNaoEncontradoException::new);
     }
 }
