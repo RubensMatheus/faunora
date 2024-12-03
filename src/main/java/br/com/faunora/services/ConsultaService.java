@@ -54,7 +54,7 @@ public class ConsultaService {
                 .orElseThrow(VeterinarioNaoEncontradoException::new);
 
         if (!veterinario.getTipo().equals(UserTipo.VETERINARIO)) {
-            throw new VeterinarioNaoEncontradoException("O veterinário não é válido");
+            throw new VeterinarioNaoEncontradoException("o veterinário fornecido não é válido");
         }
 
         consulta.setVeterinario(veterinario);
@@ -72,8 +72,8 @@ public class ConsultaService {
             throw new PetNaoEncontradoException("pet não disponível para consulta");
         }
 
-        // Consulta otimizada para verificar se o pet pertence ao tutor
         boolean isPetOwnedByUser = petRepository.existsByIdAndTutor(consulta.getPaciente().getId(), usuario);
+
         if (!isPetOwnedByUser) {
             throw new PetNaoEncontradoException("pet não disponível para consulta");
         }
