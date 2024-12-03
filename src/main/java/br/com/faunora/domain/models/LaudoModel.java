@@ -1,5 +1,6 @@
 package br.com.faunora.domain.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -23,6 +24,7 @@ public class LaudoModel implements Serializable {
     @Column(name = "laudo_validade", nullable = false)
     private LocalDate validade;
 
+    @JsonManagedReference
     @JoinColumn(name = "exame_id", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     private ExameModel exame;

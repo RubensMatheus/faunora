@@ -4,10 +4,7 @@ import br.com.faunora.domain.dto.UpdateUserNameRecordDto;
 import br.com.faunora.domain.dto.UpdateUserPasswordRecordDto;
 import br.com.faunora.domain.dto.UserRecordDto;
 import br.com.faunora.domain.models.UserModel;
-import br.com.faunora.infra.exceptions.CredenciaisInvalidasException;
-import br.com.faunora.infra.exceptions.NenhumUsuarioEncontradoException;
-import br.com.faunora.infra.exceptions.SenhasNaoCoincidemException;
-import br.com.faunora.infra.exceptions.UsuarioNaoEncontradoException;
+import br.com.faunora.infra.exceptions.*;
 import br.com.faunora.infra.security.JWTUtils;
 import br.com.faunora.repositories.UserRepository;
 import jakarta.transaction.Transactional;
@@ -28,21 +25,19 @@ import java.util.Objects;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
-    
     @Autowired
     private JWTUtils jwtUtils;
 
     @Transactional
     public UserModel saveUser(UserRecordDto userRecordDto) {
         if (userRepository.existsByEmail(userRecordDto.email())) {
-            throw new IllegalArgumentException("E-mail já cadastrado.");
+            throw new EmailNaoDisponivelException();
         }
 
         if (!userRecordDto.senha().equals(userRecordDto.confirmarSenha())) {
-            throw new IllegalArgumentException("As senhas não coincidem.");
+            throw new SenhasNaoCoincidemException();
         }
 
         UserModel userModel = new UserModel();

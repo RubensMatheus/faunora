@@ -1,6 +1,8 @@
 package br.com.faunora.domain.models;
 
 import br.com.faunora.domain.enums.ExameTipo;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -33,11 +35,12 @@ public class ExameModel implements Serializable {
     @Column(name = "exame_hora", nullable = false)
     private Instant hora;
 
+    @JsonBackReference
     @JoinColumn(name = "laudo_id")
     @OneToOne(cascade = CascadeType.ALL)
     private LaudoModel laudo;
 
     @JoinColumn(name = "user_id", nullable = false)
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private UserModel veterinario;
 }

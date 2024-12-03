@@ -45,7 +45,7 @@ public class ExameService {
         PetModel petModel = petRepository.findById(exameRecordDto.pacienteId())
                 .orElseThrow(PetNaoEncontradoException::new);
 
-        if (!userModel.getPets().contains(petModel)) {
+        if (!petRepository.findAllByTutor(userModel).contains(petModel)) {
             throw new PetNaoEncontradoException("pet não disponível para consulta");
         }
 
@@ -55,7 +55,7 @@ public class ExameService {
         exameModel.setData(exameRecordDto.data());
         exameModel.setHora(exameRecordDto.hora());
 
-        List<UserModel> veterinarios = userRepository.findAllByTipo(UserTipo.VETERINÁRIO);
+        List<UserModel> veterinarios = userRepository.findAllByTipo(UserTipo.VETERINARIO);
 
         exameModel.setVeterinario(veterinarios.get(new Random().nextInt(veterinarios.size())));
 
@@ -73,7 +73,7 @@ public class ExameService {
         ExameModel exameModel = exameRepository.findById(id)
                 .orElseThrow(ExameNaoEncontradoException::new);
 
-        if (!userModel.getPets().contains(exameModel.getPaciente())) {
+        if (!petRepository.findAllByTutor(userModel).contains(exameModel.getPaciente())) {
             throw new PetNaoEncontradoException("pet não disponível para consulta");
         }
 
@@ -90,7 +90,7 @@ public class ExameService {
 
         List<ExameModel> exameModels = new ArrayList<>();
 
-        for (PetModel petModel : userModel.getPets()) {
+        for (PetModel petModel : petRepository.findAllByTutor(userModel)) {
             exameModels.addAll(exameRepository.findAllByPaciente(petModel));
         }
 
@@ -112,7 +112,7 @@ public class ExameService {
         PetModel paciente = petRepository.findById(pacienteId)
                 .orElseThrow(PetNaoEncontradoException::new);
 
-        if (!userModel.getPets().contains(paciente)) {
+        if (!petRepository.findAllByTutor(userModel).contains(paciente)) {
             throw new PetNaoEncontradoException("pet não disponível para consulta");
         }
 
@@ -134,7 +134,7 @@ public class ExameService {
                 .orElseThrow(UsuarioNaoEncontradoException::new);
 
         List<ExameModel> exameModels = new ArrayList<>();
-        for (PetModel petModel : userModel.getPets()) {
+        for (PetModel petModel : petRepository.findAllByTutor(userModel)) {
             exameModels.addAll(exameRepository.findAllByTipoAndPaciente(tipo, petModel));
         }
 
@@ -200,7 +200,7 @@ public class ExameService {
         PetModel petModel = petRepository.findById(exameRecordDto.pacienteId())
                 .orElseThrow(() -> new PetNaoEncontradoException("pet não disponível para consulta"));
 
-        if (!userModel.getPets().contains(petModel)) {
+        if (!petRepository.findAllByTutor(userModel).contains(petModel)) {
             throw new PetNaoEncontradoException();
         }
 
@@ -224,7 +224,7 @@ public class ExameService {
         ExameModel exameModel = exameRepository.findById(id)
                 .orElseThrow(ExameNaoEncontradoException::new);
 
-        if (!userModel.getPets().contains(exameModel.getPaciente())) {
+        if (!petRepository.findAllByTutor(userModel).contains(exameModel.getPaciente())) {
             throw new PetNaoEncontradoException("pet não disponível para consulta");
         }
 

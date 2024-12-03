@@ -18,7 +18,6 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -27,14 +26,17 @@ public class PetService {
     private PetRepository petRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private DosagemRepository dosagemRepository;
+    @Autowired
+    private ConsultaRepository consultaRepository;
+    @Autowired
+    private ExameRepository exameRepository;
 
     @Transactional
     public void savePet(PetRecordDto petRecordDto) {
         PetModel petModel = new PetModel();
         BeanUtils.copyProperties(petRecordDto, petModel);
-        petModel.setDosagens(new HashSet<>());
-        petModel.setConsultas(new HashSet<>());
-        petModel.setExames(new HashSet<>());
 
         if (SecurityContextHolder.getContext().getAuthentication() == null) {
             throw new UsuarioNaoEncontradoException();
@@ -73,10 +75,10 @@ public class PetService {
         UserModel userModel = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName())
                 .orElseThrow(UsuarioNaoEncontradoException::new);
 
-        List<PetModel> petModels = userModel.getPets();
+        List<PetModel> petModels = petRepository.findAllByTutor(userModel);
 
         for (PetModel petModel : petModels) {
-            for (DosagemModel dosagemModel : petModel.getDosagens()) {
+            for (DosagemModel dosagemModel : dosagemRepository.findAllByPaciente(petModel)) {
                 if (dosagemModel.getData().isAfter(ChronoLocalDate.from(Instant.now()))) {
                     petModelsByProximasVacinas.add(petModel);
                 }
@@ -100,10 +102,10 @@ public class PetService {
         UserModel userModel = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName())
                 .orElseThrow(UsuarioNaoEncontradoException::new);
 
-        List<PetModel> petModels = userModel.getPets();
+        List<PetModel> petModels = petRepository.findAllByTutor(userModel);
 
         for (PetModel petModel : petModels) {
-            for (ConsultaModel consultaModel : petModel.getConsultas()) {
+            for (ConsultaModel consultaModel : consultaRepository.findAllByPaciente(petModel)) {
                 if (consultaModel.getData().isAfter(ChronoLocalDate.from(Instant.now()))) {
                     petModelsByProximasConsultas.add(petModel);
                 }
@@ -127,10 +129,10 @@ public class PetService {
         UserModel userModel = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName())
                 .orElseThrow(UsuarioNaoEncontradoException::new);
 
-        List<PetModel> petModels = userModel.getPets();
+        List<PetModel> petModels = petRepository.findAllByTutor(userModel);
 
         for (PetModel petModel : petModels) {
-            for (ExameModel exameModel : petModel.getExames()) {
+            for (ExameModel exameModel : exameRepository.findAllByPaciente(petModel)) {
                 if (exameModel.getData().isAfter(ChronoLocalDate.from(Instant.now()))) {
                     petModelsByProximosExames.add(petModel);
                 }
@@ -154,7 +156,7 @@ public class PetService {
         UserModel userModel = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName())
                 .orElseThrow(UsuarioNaoEncontradoException::new);
 
-        List<PetModel> petModels = userModel.getPets();
+        List<PetModel> petModels = petRepository.findAllByTutor(userModel);
 
         for (PetModel petModel : petModels) {
             if (petModel.getNome().contains(filter) || petModel.getTipo().toString().contains(filter) || petModel.getSexo().toString().contains(filter) || petModel.getDataNascimento().toString().contains(filter) || Double.toString(petModel.getPeso()).contains(filter)) {

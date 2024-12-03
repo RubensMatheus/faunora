@@ -2,6 +2,7 @@ package br.com.faunora.domain.models;
 
 import br.com.faunora.domain.enums.PetSexo;
 import br.com.faunora.domain.enums.PetTipo;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -40,15 +41,5 @@ public class PetModel implements Serializable {
     @JoinColumn(name = "user_id", nullable = false)
     @ManyToOne
     private UserModel tutor;
-
-    @OneToMany(mappedBy = "paciente")
-    Set<ConsultaModel> consultas;
-
-    @OneToMany(mappedBy = "paciente")
-    Set<ExameModel> exames;
-
-    @OneToMany(mappedBy = "paciente")
-    Set<DosagemModel> dosagens;
-
     /*adicionar foto de perfil*/
 }

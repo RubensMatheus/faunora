@@ -23,3 +23,6 @@ api:
         time: 14
       ending:
         time: 18
+  security:
+    token:
+      secret: lupita-gatinha-linda

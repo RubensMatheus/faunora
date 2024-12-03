@@ -1,6 +1,7 @@
 package br.com.faunora.domain.models;
 
 import br.com.faunora.domain.enums.DosagemTipo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -34,6 +35,6 @@ public class DosagemModel implements Serializable {
     private Instant hora;
 
     @JoinColumn(name = "user_id", nullable = false)
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private UserModel veterinario;
 }

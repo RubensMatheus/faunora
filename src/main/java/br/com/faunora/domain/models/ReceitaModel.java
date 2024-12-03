@@ -1,5 +1,6 @@
 package br.com.faunora.domain.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,6 +23,7 @@ public class ReceitaModel implements Serializable {
     @Column(name = "receita_recomendacao")
     private String recomendacao;
 
+    @JsonManagedReference
     @JoinColumn(name = "consulta_id", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     private ConsultaModel consulta;

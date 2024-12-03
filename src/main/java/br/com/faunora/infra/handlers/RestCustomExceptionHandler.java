@@ -13,4 +13,9 @@ public class RestCustomExceptionHandler {
     public ResponseEntity<RestMensagemRecordDto> handleNotFoundException(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new RestMensagemRecordDto(ex.getMessage()));
     }
+
+    @ExceptionHandler({EmailNaoDisponivelException.class})
+    public ResponseEntity<RestMensagemRecordDto> handleConflictException(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new RestMensagemRecordDto(ex.getMessage()));
+    }
 }

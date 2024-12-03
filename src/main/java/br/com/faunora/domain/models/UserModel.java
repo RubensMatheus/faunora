@@ -3,14 +3,18 @@ package br.com.faunora.domain.models;
 import br.com.faunora.domain.enums.UserTipo;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 @Table(name = "tb_users")
 @Data
-public class UserModel implements Serializable {
+public class UserModel implements Serializable, UserDetails {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -28,12 +32,24 @@ public class UserModel implements Serializable {
     private String email;
 
     @Column(name = "user_senha", nullable = false)
-    private String senha; // Senha com hash
+    private String senha;
 
     @Column(name = "user_tipo", nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserTipo tipo; // CLIENTE ou VETERINARIO
+    private UserTipo tipo;
 
-    @OneToMany(mappedBy = "tutor", cascade = CascadeType.ALL)
-    private List<PetModel> pets;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + tipo.name().toUpperCase()));
+    }
+
+    @Override
+    public String getPassword() {
+        return senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
 }

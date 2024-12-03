@@ -2,7 +2,7 @@ package br.com.faunora.domain.enums;
 
 public enum UserTipo {
     TUTOR,
-    VETERINÁRIO;
+    VETERINARIO;
 
     @Override
     public String toString() { return name().toLowerCase(); }
