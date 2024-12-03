@@ -20,7 +20,7 @@ public class ReceitaModel implements Serializable {
     @Column(name = "receita_prescricao", nullable = false)
     private String prescricao;
 
-    @Column(name = "receita_recomendacao")
+    @Column(name = "receita_recomendacao", nullable = false)
     private String recomendacao;
 
     @JsonManagedReference

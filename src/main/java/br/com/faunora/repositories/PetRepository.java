@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface PetRepository extends JpaRepository<PetModel, Long> {
     List<PetModel> findAllByTutor(UserModel userModel);
+    boolean existsByIdAndTutor(Long id, UserModel userModel);
 }
