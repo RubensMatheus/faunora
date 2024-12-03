@@ -1,6 +1,8 @@
 package br.com.faunora.controllers;
 
 import br.com.faunora.domain.dto.RestMensagemRecordDto;
+import br.com.faunora.domain.dto.UpdateUserNameRecordDto;
+import br.com.faunora.domain.dto.UpdateUserPasswordRecordDto;
 import br.com.faunora.domain.dto.UserRecordDto;
 import br.com.faunora.domain.models.UserModel;
 import br.com.faunora.services.UserService;
@@ -40,6 +42,17 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("usuário atualizado com sucesso"));
     }
 
+    @PatchMapping("/nome/{id}")
+    public ResponseEntity<RestMensagemRecordDto> updateNome(@PathVariable Long id, @RequestBody UpdateUserNameRecordDto updateUserNameRecordDto) {
+        userService.updateNome(id, updateUserNameRecordDto);
+        return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("nome e sobrenome atualizados com sucesso"));
+    }
+
+    @PatchMapping("/senha/{id}")
+    public ResponseEntity<RestMensagemRecordDto> updateSenha(@PathVariable Long id, @RequestBody UpdateUserPasswordRecordDto updateUserPasswordRecordDto) {
+        userService.updateSenha(id, updateUserPasswordRecordDto);
+        return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("senha atualizada com sucesso"));
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<RestMensagemRecordDto> deleteUserById(@PathVariable Long id) {

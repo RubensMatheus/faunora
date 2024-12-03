@@ -1,8 +1,12 @@
 package br.com.faunora.services;
 
+import br.com.faunora.domain.dto.UpdateUserNameRecordDto;
+import br.com.faunora.domain.dto.UpdateUserPasswordRecordDto;
 import br.com.faunora.domain.dto.UserRecordDto;
 import br.com.faunora.domain.models.UserModel;
+import br.com.faunora.infra.exceptions.CredenciaisInvalidasException;
 import br.com.faunora.infra.exceptions.NenhumUsuarioEncontradoException;
+import br.com.faunora.infra.exceptions.SenhasNaoCoincidemException;
 import br.com.faunora.infra.exceptions.UsuarioNaoEncontradoException;
 import br.com.faunora.infra.security.JWTUtils;
 import br.com.faunora.repositories.UserRepository;
@@ -18,6 +22,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class UserService {
@@ -119,6 +124,39 @@ public class UserService {
         } catch (NoSuchMethodException e) {
             return null;
         }
+    }
+
+    @Transactional
+    public void updateSenha(Long id, UpdateUserPasswordRecordDto updateUserPasswordRecordDto) {
+        UserModel userModel = userRepository.findById(id)
+                .orElseThrow(UsuarioNaoEncontradoException::new);
+
+        if (!passwordEncoder.matches(updateUserPasswordRecordDto.senhaAtual(), userModel.getSenha())) {
+            throw new CredenciaisInvalidasException("senha atual incorreta");
+        }
+
+        if (!Objects.equals(updateUserPasswordRecordDto.senhaNova(), updateUserPasswordRecordDto.confirmacaoSenhaNova())) {
+            throw new SenhasNaoCoincidemException();
+        }
+
+        userModel.setSenha(passwordEncoder.encode(updateUserPasswordRecordDto.senhaNova()));
+
+        userRepository.save(userModel);
+    }
+
+    @Transactional
+    public void updateNome(Long id, UpdateUserNameRecordDto updateUserNameRecordDto) {
+        UserModel userModel = userRepository.findById(id)
+                .orElseThrow(UsuarioNaoEncontradoException::new);
+
+        if (!passwordEncoder.matches(updateUserNameRecordDto.senhaAtual(), userModel.getSenha())) {
+            throw new CredenciaisInvalidasException("senha atual incorreta");
+        }
+
+        userModel.setNome(updateUserNameRecordDto.novoNome());
+        userModel.setSobrenome(updateUserNameRecordDto.novoSobrenome());
+
+        userRepository.save(userModel);
     }
 
     @Transactional

@@ -36,5 +36,4 @@ public class UserModel implements Serializable {
 
     @OneToMany(mappedBy = "tutor", cascade = CascadeType.ALL)
     private List<PetModel> pets;
-
 }
