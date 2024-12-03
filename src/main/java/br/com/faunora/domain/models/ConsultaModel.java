@@ -31,7 +31,7 @@ public class ConsultaModel implements Serializable {
     private Instant hora;
 
     @JsonBackReference
-    @JoinColumn(name = "receita_id", nullable = false, unique = true)
+    @JoinColumn(name = "receita_id", unique = true)
     @OneToOne(cascade = CascadeType.ALL)
     private ReceitaModel receita;
 
