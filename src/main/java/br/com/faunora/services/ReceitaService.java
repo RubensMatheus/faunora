@@ -1,10 +1,13 @@
 package br.com.faunora.services;
 
-import br.com.faunora.domain.dto.LaudoRecordDto;
-import br.com.faunora.domain.dto.ReceitaRecordDto;
+import br.com.faunora.domain.dto.consultas.ReceitaRecordDto;
 import br.com.faunora.domain.enums.UserTipo;
 import br.com.faunora.domain.models.*;
-import br.com.faunora.infra.exceptions.*;
+import br.com.faunora.infra.exceptions.consultas.CadastroReceitaInvalidoException;
+import br.com.faunora.infra.exceptions.consultas.ConsultaNaoEncontradaException;
+import br.com.faunora.infra.exceptions.consultas.ReceitaNaoEncontradaException;
+import br.com.faunora.infra.exceptions.users.UsuarioNaoEncontradoException;
+import br.com.faunora.infra.exceptions.users.VeterinarioInvalidoException;
 import br.com.faunora.repositories.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

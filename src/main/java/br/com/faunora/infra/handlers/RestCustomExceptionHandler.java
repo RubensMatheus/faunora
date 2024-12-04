@@ -1,7 +1,25 @@
 package br.com.faunora.infra.handlers;
 
-import br.com.faunora.domain.dto.RestMensagemRecordDto;
-import br.com.faunora.infra.exceptions.*;
+import br.com.faunora.domain.dto.rest.RestMensagemRecordDto;
+import br.com.faunora.infra.exceptions.consultas.CadastroReceitaInvalidoException;
+import br.com.faunora.infra.exceptions.consultas.ConsultaNaoEncontradaException;
+import br.com.faunora.infra.exceptions.consultas.NenhumaConsultaEncontradaException;
+import br.com.faunora.infra.exceptions.consultas.ReceitaNaoEncontradaException;
+import br.com.faunora.infra.exceptions.datas.HorarioIndisponivelException;
+import br.com.faunora.infra.exceptions.dosagens.DosagemNaoEncontradaException;
+import br.com.faunora.infra.exceptions.dosagens.NenhumaDosagemEncontradaException;
+import br.com.faunora.infra.exceptions.exames.CadastroLaudoInvalidoException;
+import br.com.faunora.infra.exceptions.exames.ExameNaoEncontradoException;
+import br.com.faunora.infra.exceptions.exames.LaudoNaoEncontradoException;
+import br.com.faunora.infra.exceptions.exames.NenhumExameEncontradoException;
+import br.com.faunora.infra.exceptions.pets.NenhumPetEncontradoException;
+import br.com.faunora.infra.exceptions.pets.PetIndisponivelException;
+import br.com.faunora.infra.exceptions.pets.PetNaoEncontradoException;
+import br.com.faunora.infra.exceptions.produtos.NenhumPedidoEncontradoException;
+import br.com.faunora.infra.exceptions.produtos.NenhumProdutoEncontradoException;
+import br.com.faunora.infra.exceptions.produtos.PedidoNaoEncontradoException;
+import br.com.faunora.infra.exceptions.produtos.ProdutoNaoEncontradoException;
+import br.com.faunora.infra.exceptions.users.*;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import jakarta.mail.MessagingException;
 import jakarta.validation.ConstraintViolation;

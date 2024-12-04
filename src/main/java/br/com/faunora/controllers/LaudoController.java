@@ -1,7 +1,7 @@
 package br.com.faunora.controllers;
 
-import br.com.faunora.domain.dto.LaudoRecordDto;
-import br.com.faunora.domain.dto.RestMensagemRecordDto;
+import br.com.faunora.domain.dto.exames.LaudoRecordDto;
+import br.com.faunora.domain.dto.rest.RestMensagemRecordDto;
 import br.com.faunora.domain.models.LaudoModel;
 import br.com.faunora.services.LaudoService;
 import jakarta.validation.Valid;

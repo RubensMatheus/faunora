@@ -1,6 +1,7 @@
 package br.com.faunora.controllers;
 
-import br.com.faunora.domain.dto.*;
+import br.com.faunora.domain.dto.rest.RestMensagemRecordDto;
+import br.com.faunora.domain.dto.users.*;
 import br.com.faunora.domain.models.UserModel;
 import br.com.faunora.services.UserService;
 import jakarta.mail.MessagingException;

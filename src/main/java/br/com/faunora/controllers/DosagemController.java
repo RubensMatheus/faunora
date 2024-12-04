@@ -1,7 +1,7 @@
 package br.com.faunora.controllers;
 
-import br.com.faunora.domain.dto.DosagemRecordDto;
-import br.com.faunora.domain.dto.RestMensagemRecordDto;
+import br.com.faunora.domain.dto.dosagens.DosagemRecordDto;
+import br.com.faunora.domain.dto.rest.RestMensagemRecordDto;
 import br.com.faunora.domain.enums.DosagemTipo;
 import br.com.faunora.domain.models.DosagemModel;
 import br.com.faunora.services.DosagemService;

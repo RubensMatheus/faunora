@@ -1,14 +1,13 @@
 package br.com.faunora.controllers;
 
-import br.com.faunora.domain.dto.ConsultaRecordDto;
-import br.com.faunora.domain.dto.RestMensagemRecordDto;
+import br.com.faunora.domain.dto.consultas.ConsultaRecordDto;
+import br.com.faunora.domain.dto.rest.RestMensagemRecordDto;
 import br.com.faunora.domain.models.ConsultaModel;
 import br.com.faunora.services.ConsultaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 

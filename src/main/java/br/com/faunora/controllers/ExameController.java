@@ -1,7 +1,7 @@
 package br.com.faunora.controllers;
 
-import br.com.faunora.domain.dto.ExameRecordDto;
-import br.com.faunora.domain.dto.RestMensagemRecordDto;
+import br.com.faunora.domain.dto.exames.ExameRecordDto;
+import br.com.faunora.domain.dto.rest.RestMensagemRecordDto;
 import br.com.faunora.domain.enums.ExameTipo;
 import br.com.faunora.domain.models.ExameModel;
 import br.com.faunora.services.ExameService;

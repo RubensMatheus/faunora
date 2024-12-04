@@ -1,7 +1,7 @@
 package br.com.faunora.controllers;
 
-import br.com.faunora.domain.dto.ProdutoRecordDto;
-import br.com.faunora.domain.dto.RestMensagemRecordDto;
+import br.com.faunora.domain.dto.produtos.ProdutoRecordDto;
+import br.com.faunora.domain.dto.rest.RestMensagemRecordDto;
 import br.com.faunora.domain.enums.ProdutoTipo;
 import br.com.faunora.domain.models.ProdutoModel;
 import br.com.faunora.services.ProdutoService;

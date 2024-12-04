@@ -1,7 +1,7 @@
 package br.com.faunora.controllers;
 
-import br.com.faunora.domain.dto.ReceitaRecordDto;
-import br.com.faunora.domain.dto.RestMensagemRecordDto;
+import br.com.faunora.domain.dto.consultas.ReceitaRecordDto;
+import br.com.faunora.domain.dto.rest.RestMensagemRecordDto;
 import br.com.faunora.domain.models.ReceitaModel;
 import br.com.faunora.services.ReceitaService;
 import org.springframework.beans.factory.annotation.Autowired;

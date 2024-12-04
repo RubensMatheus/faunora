@@ -1,11 +1,10 @@
 package br.com.faunora.services;
 
-import br.com.faunora.domain.dto.ProdutoRecordDto;
+import br.com.faunora.domain.dto.produtos.ProdutoRecordDto;
 import br.com.faunora.domain.enums.ProdutoTipo;
 import br.com.faunora.domain.models.ProdutoModel;
-import br.com.faunora.infra.exceptions.NenhumProdutoEncontradoException;
-import br.com.faunora.infra.exceptions.PetNaoEncontradoException;
-import br.com.faunora.infra.exceptions.ProdutoNaoEncontradoException;
+import br.com.faunora.infra.exceptions.produtos.NenhumProdutoEncontradoException;
+import br.com.faunora.infra.exceptions.produtos.ProdutoNaoEncontradoException;
 import br.com.faunora.repositories.ProdutoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;

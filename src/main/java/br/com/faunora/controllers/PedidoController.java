@@ -1,8 +1,8 @@
 package br.com.faunora.controllers;
 
-import br.com.faunora.domain.dto.PedidoRecordDto;
-import br.com.faunora.domain.dto.RestMensagemRecordDto;
-import br.com.faunora.domain.dto.UpdatePedidoRecordDto;
+import br.com.faunora.domain.dto.produtos.PedidoRecordDto;
+import br.com.faunora.domain.dto.rest.RestMensagemRecordDto;
+import br.com.faunora.domain.dto.produtos.UpdatePedidoRecordDto;
 import br.com.faunora.domain.models.PedidoModel;
 import br.com.faunora.services.PedidoService;
 import jakarta.validation.Valid;

@@ -1,7 +1,5 @@
 package br.com.faunora.services;
 
-import br.com.faunora.infra.exceptions.NenhumUsuarioEncontradoException;
-import br.com.faunora.infra.exceptions.UsuarioNaoEncontradoException;
 import br.com.faunora.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;

@@ -1,12 +1,20 @@
 package br.com.faunora.services;
 
-import br.com.faunora.domain.dto.ConsultaRecordDto;
+import br.com.faunora.domain.dto.consultas.ConsultaRecordDto;
 import br.com.faunora.domain.enums.UserTipo;
 import br.com.faunora.domain.models.ConsultaModel;
-import br.com.faunora.domain.models.ExameModel;
 import br.com.faunora.domain.models.PetModel;
 import br.com.faunora.domain.models.UserModel;
-import br.com.faunora.infra.exceptions.*;
+import br.com.faunora.infra.exceptions.consultas.ConsultaNaoEncontradaException;
+import br.com.faunora.infra.exceptions.consultas.NenhumaConsultaEncontradaException;
+import br.com.faunora.infra.exceptions.datas.DataIndisponivelException;
+import br.com.faunora.infra.exceptions.datas.HorarioIndisponivelException;
+import br.com.faunora.infra.exceptions.exames.NenhumExameEncontradoException;
+import br.com.faunora.infra.exceptions.pets.PetIndisponivelException;
+import br.com.faunora.infra.exceptions.pets.PetNaoEncontradoException;
+import br.com.faunora.infra.exceptions.users.UsuarioNaoEncontradoException;
+import br.com.faunora.infra.exceptions.users.VeterinarioInvalidoException;
+import br.com.faunora.infra.exceptions.users.VeterinarioNaoEncontradoException;
 import br.com.faunora.repositories.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,13 +1,14 @@
 package br.com.faunora.services;
 
-import br.com.faunora.domain.dto.PedidoRecordDto;
-import br.com.faunora.domain.dto.UpdatePedidoRecordDto;
+import br.com.faunora.domain.dto.produtos.PedidoRecordDto;
+import br.com.faunora.domain.dto.produtos.UpdatePedidoRecordDto;
 import br.com.faunora.domain.enums.PedidoStatus;
 import br.com.faunora.domain.models.PedidoModel;
 import br.com.faunora.domain.models.ProdutoModel;
-import br.com.faunora.infra.exceptions.NenhumProdutoEncontradoException;
-import br.com.faunora.infra.exceptions.PedidoNaoEncontradoException;
-import br.com.faunora.infra.exceptions.ProdutoNaoEncontradoException;
+import br.com.faunora.infra.exceptions.produtos.CancelamentoImpossivelException;
+import br.com.faunora.infra.exceptions.produtos.NenhumProdutoEncontradoException;
+import br.com.faunora.infra.exceptions.produtos.PedidoNaoEncontradoException;
+import br.com.faunora.infra.exceptions.produtos.ProdutoNaoEncontradoException;
 import br.com.faunora.repositories.PedidoRepository;
 import br.com.faunora.repositories.ProdutoRepository;
 import jakarta.transaction.Transactional;
@@ -71,6 +72,10 @@ public class PedidoService {
     public void cancelarPedido(Long id) {
         PedidoModel pedidoModel = pedidoRepository.findById(id)
                 .orElseThrow(PedidoNaoEncontradoException::new);
+
+        if (!(pedidoModel.getStatus() == PedidoStatus.PENDENTE)) {
+            throw new CancelamentoImpossivelException();
+        }
 
         pedidoModel.setStatus(PedidoStatus.CANCELADO);
 

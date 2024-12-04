@@ -1,11 +1,15 @@
 package br.com.faunora.services;
 
-import br.com.faunora.domain.dto.LaudoRecordDto;
+import br.com.faunora.domain.dto.exames.LaudoRecordDto;
 import br.com.faunora.domain.enums.UserTipo;
 import br.com.faunora.domain.models.ExameModel;
 import br.com.faunora.domain.models.LaudoModel;
 import br.com.faunora.domain.models.UserModel;
-import br.com.faunora.infra.exceptions.*;
+import br.com.faunora.infra.exceptions.exames.CadastroLaudoInvalidoException;
+import br.com.faunora.infra.exceptions.exames.ExameNaoEncontradoException;
+import br.com.faunora.infra.exceptions.exames.LaudoNaoEncontradoException;
+import br.com.faunora.infra.exceptions.users.UsuarioNaoEncontradoException;
+import br.com.faunora.infra.exceptions.users.VeterinarioInvalidoException;
 import br.com.faunora.repositories.ExameRepository;
 import br.com.faunora.repositories.LaudoRepository;
 import br.com.faunora.repositories.UserRepository;

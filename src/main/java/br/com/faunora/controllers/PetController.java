@@ -1,13 +1,13 @@
 package br.com.faunora.controllers;
 
-import br.com.faunora.domain.dto.RestMensagemRecordDto;
+import br.com.faunora.domain.dto.rest.RestMensagemRecordDto;
 import br.com.faunora.domain.enums.PetSexo;
 import br.com.faunora.domain.enums.PetTipo;
 import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import br.com.faunora.domain.dto.PetRecordDto;
+import br.com.faunora.domain.dto.pets.PetRecordDto;
 import br.com.faunora.domain.models.PetModel;
 import br.com.faunora.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;

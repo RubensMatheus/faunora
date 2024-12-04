@@ -1,8 +1,8 @@
 package br.com.faunora.services;
 
-import br.com.faunora.domain.dto.*;
+import br.com.faunora.domain.dto.users.*;
 import br.com.faunora.domain.models.UserModel;
-import br.com.faunora.infra.exceptions.*;
+import br.com.faunora.infra.exceptions.users.*;
 import br.com.faunora.infra.security.TokenService;
 import br.com.faunora.repositories.UserRepository;
 import jakarta.mail.MessagingException;

@@ -1,12 +1,12 @@
 package br.com.faunora.services;
 
-import br.com.faunora.domain.dto.PetRecordDto;
+import br.com.faunora.domain.dto.pets.PetRecordDto;
 import br.com.faunora.domain.enums.PetSexo;
 import br.com.faunora.domain.enums.PetTipo;
 import br.com.faunora.domain.models.*;
-import br.com.faunora.infra.exceptions.NenhumPetEncontradoException;
-import br.com.faunora.infra.exceptions.PetNaoEncontradoException;
-import br.com.faunora.infra.exceptions.UsuarioNaoEncontradoException;
+import br.com.faunora.infra.exceptions.pets.NenhumPetEncontradoException;
+import br.com.faunora.infra.exceptions.pets.PetNaoEncontradoException;
+import br.com.faunora.infra.exceptions.users.UsuarioNaoEncontradoException;
 import br.com.faunora.repositories.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
