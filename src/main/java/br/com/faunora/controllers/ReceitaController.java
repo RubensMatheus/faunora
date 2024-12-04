@@ -20,7 +20,7 @@ public class ReceitaController {
     @PostMapping
     public ResponseEntity<RestMensagemRecordDto> saveReceita(@RequestBody ReceitaRecordDto receitaRecordDto) {
         receitaService.saveReceita(receitaRecordDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new RestMensagemRecordDto("Receita criada com sucesso"));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new RestMensagemRecordDto("receita criada com sucesso"));
     }
 
     @GetMapping("/{id}")
@@ -32,13 +32,13 @@ public class ReceitaController {
     @PutMapping("/{id}")
     public ResponseEntity<RestMensagemRecordDto> updateReceitaById(@PathVariable Long id, @RequestBody ReceitaRecordDto receitaRecordDto) {
         receitaService.updateById(id, receitaRecordDto);
-        return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("Receita atualizada com sucesso"));
+        return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("receita atualizada com sucesso"));
     }
 
     @PreAuthorize("hasRole('ROLE_VETERINARIO')")
     @DeleteMapping("/{id}")
     public ResponseEntity<RestMensagemRecordDto> deleteReceitaById(@PathVariable Long id) {
         receitaService.deleteById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("Receita deletada com sucesso"));
+        return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("receita deletada com sucesso"));
     }
 }

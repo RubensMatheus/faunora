@@ -1,9 +1,9 @@
 package br.com.faunora.domain.enums;
 
 public enum DosagemTipo {
-    QUÍNTUPLA,
-    ANTIRRÁBICA,
-    GIARDÍASE;
+    QUINTUPLA,
+    ANTIRRABICA,
+    GIARDIASE;
 
     @Override
     public String toString() {

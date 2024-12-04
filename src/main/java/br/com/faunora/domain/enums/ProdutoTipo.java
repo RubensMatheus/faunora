@@ -2,9 +2,9 @@ package br.com.faunora.domain.enums;
 
 public enum ProdutoTipo {
     HIGIENE,
-    ALIMENTAÇÃO,
+    ALIMENTACAO,
     LAZER,
-    MEDICAÇÃO;
+    MEDICACAO;
 
     @Override
     public String toString() { return name().toLowerCase(); }

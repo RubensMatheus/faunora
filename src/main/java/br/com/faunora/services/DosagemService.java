@@ -7,9 +7,7 @@ import br.com.faunora.domain.models.DosagemModel;
 import br.com.faunora.domain.models.PetModel;
 import br.com.faunora.domain.models.UserModel;
 import br.com.faunora.infra.exceptions.*;
-import br.com.faunora.repositories.DosagemRepository;
-import br.com.faunora.repositories.PetRepository;
-import br.com.faunora.repositories.UserRepository;
+import br.com.faunora.repositories.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,6 +27,10 @@ public class DosagemService {
     private UserRepository userRepository;
     @Autowired
     private HorarioService horarioService;
+    @Autowired
+    private ExameRepository exameRepository;
+    @Autowired
+    private ConsultaRepository consultaRepository;
 
     @Transactional
     public void saveDosagem(DosagemRecordDto dosagemRecordDto) {
@@ -43,7 +45,7 @@ public class DosagemService {
                 .orElseThrow(PetNaoEncontradoException::new);
 
         if (!petRepository.findAllByTutor(userModel).contains(petModel)) {
-            throw new PetNaoEncontradoException("pet não disponível para consulta");
+            throw new PetNaoEncontradoException("pet não disponível para dosagem");
         }
 
         if (!horarioService.isDateValid(dosagemRecordDto.data())) {
@@ -52,6 +54,12 @@ public class DosagemService {
 
         if (!horarioService.isSlotValid(dosagemRecordDto.hora())) {
             throw new HorarioIndisponivelException();
+        }
+
+        if (!consultaRepository.findAllByPacienteAndDataAndHora(petModel, dosagemRecordDto.data(), dosagemRecordDto.hora()).isEmpty()
+                || !exameRepository.findAllByPacienteAndDataAndHora(petModel, dosagemRecordDto.data(), dosagemRecordDto.hora()).isEmpty()
+                || !dosagemRepository.findAllByPacienteAndDataAndHora(petModel, dosagemRecordDto.data(), dosagemRecordDto.hora()).isEmpty()) {
+            throw new PetIndisponivelException();
         }
 
         DosagemModel dosagemModel = new DosagemModel();

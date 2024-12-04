@@ -29,10 +29,10 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/usuarios/registrar").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/usuarios/login").permitAll()
-                        .requestMatchers(HttpMethod.PATCH, "/usuarios/redefinir-senha").permitAll()
-                        .requestMatchers(HttpMethod.PATCH, "/usuarios/esqueceu-senha").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users/registrar").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users/login").permitAll()
+                        .requestMatchers(HttpMethod.PATCH, "/users/redefinir-senha").permitAll()
+                        .requestMatchers(HttpMethod.PATCH, "/users/esqueceu-senha").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);

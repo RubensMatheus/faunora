@@ -7,9 +7,7 @@ import br.com.faunora.domain.models.ExameModel;
 import br.com.faunora.domain.models.PetModel;
 import br.com.faunora.domain.models.UserModel;
 import br.com.faunora.infra.exceptions.*;
-import br.com.faunora.repositories.ExameRepository;
-import br.com.faunora.repositories.PetRepository;
-import br.com.faunora.repositories.UserRepository;
+import br.com.faunora.repositories.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,7 +27,10 @@ public class ExameService {
     private UserRepository userRepository;
     @Autowired
     private HorarioService horarioService;
-
+    @Autowired
+    private ConsultaRepository consultaRepository;
+    @Autowired
+    private DosagemRepository dosagemRepository;
 
     @Transactional
     public void saveExame(ExameRecordDto exameRecordDto) {
@@ -53,6 +54,12 @@ public class ExameService {
 
         if (!horarioService.isSlotValid(exameRecordDto.hora())) {
             throw new HorarioIndisponivelException();
+        }
+
+        if (!consultaRepository.findAllByPacienteAndDataAndHora(petModel, exameRecordDto.data(), exameRecordDto.hora()).isEmpty()
+                || !exameRepository.findAllByPacienteAndDataAndHora(petModel, exameRecordDto.data(), exameRecordDto.hora()).isEmpty()
+                || !dosagemRepository.findAllByPacienteAndDataAndHora(petModel, exameRecordDto.data(), exameRecordDto.hora()).isEmpty()) {
+            throw new PetIndisponivelException();
         }
 
         ExameModel exameModel = new ExameModel();
@@ -136,7 +143,7 @@ public class ExameService {
                 .orElseThrow(PetNaoEncontradoException::new);
 
         if (!petRepository.findAllByTutor(userModel).contains(paciente)) {
-            throw new PetNaoEncontradoException("pet não disponível para consulta");
+            throw new PetNaoEncontradoException("pet não disponível para exame");
         }
 
         List<ExameModel> exameModels = exameRepository.findAllByPaciente(paciente);

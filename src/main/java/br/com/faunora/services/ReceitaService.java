@@ -2,21 +2,16 @@ package br.com.faunora.services;
 
 import br.com.faunora.domain.dto.LaudoRecordDto;
 import br.com.faunora.domain.dto.ReceitaRecordDto;
-import br.com.faunora.domain.models.ConsultaModel;
-import br.com.faunora.domain.models.ExameModel;
-import br.com.faunora.domain.models.LaudoModel;
-import br.com.faunora.domain.models.ReceitaModel;
-import br.com.faunora.infra.exceptions.ConsultaNaoEncontradaException;
-import br.com.faunora.infra.exceptions.ExameNaoEncontradoException;
-import br.com.faunora.infra.exceptions.LaudoNaoEncontradoException;
-import br.com.faunora.infra.exceptions.ReceitaNaoEncontradaException;
-import br.com.faunora.repositories.ConsultaRepository;
-import br.com.faunora.repositories.ExameRepository;
-import br.com.faunora.repositories.LaudoRepository;
-import br.com.faunora.repositories.ReceitaRepository;
+import br.com.faunora.domain.enums.UserTipo;
+import br.com.faunora.domain.models.*;
+import br.com.faunora.infra.exceptions.*;
+import br.com.faunora.repositories.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class ReceitaService {
@@ -24,11 +19,34 @@ public class ReceitaService {
     private ReceitaRepository receitaRepository;
     @Autowired
     private ConsultaRepository consultaRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Transactional
     public void saveReceita(ReceitaRecordDto receitaRecordDto) {
+        if (SecurityContextHolder.getContext().getAuthentication() == null) {
+            throw new UsuarioNaoEncontradoException();
+        }
+
+        UserModel userModel = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName())
+                .orElseThrow(UsuarioNaoEncontradoException::new);
+
+        if (userModel.getTipo() != UserTipo.VETERINARIO) {
+            throw new VeterinarioInvalidoException("usuário não é veterinário");
+        }
+
         ConsultaModel consulta = consultaRepository.findById(receitaRecordDto.consultaId())
                 .orElseThrow(ConsultaNaoEncontradaException::new);
+
+        if (!consulta.getVeterinario().equals(userModel)) {
+            throw new VeterinarioInvalidoException("apenas o veterinário responsável pela consulta pode atribui-la uma receita");
+        }
+
+        LocalDateTime horaConsulta = LocalDateTime.of(consulta.getData(), consulta.getHora());
+
+        if (horaConsulta.isAfter(LocalDateTime.now())) {
+            throw new CadastroReceitaInvalidoException();
+        }
 
         ReceitaModel receita = new ReceitaModel();
         receita.setConsulta(consulta);

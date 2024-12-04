@@ -23,7 +23,11 @@ public class ProdutoService {
     @Transactional
     public void saveProduto(ProdutoRecordDto produtoRecordDto) {
         ProdutoModel produtoModel = new ProdutoModel();
-        BeanUtils.copyProperties(produtoRecordDto, produtoModel);
+        produtoModel.setCategoria(produtoRecordDto.tipo());
+        produtoModel.setDescricao(produtoRecordDto.descricao());
+        produtoModel.setPreco(produtoRecordDto.preco());
+        produtoModel.setNome(produtoRecordDto.nome());
+        produtoModel.setMarca(produtoRecordDto.marca());
 
         produtoRepository.save(produtoModel);
     }

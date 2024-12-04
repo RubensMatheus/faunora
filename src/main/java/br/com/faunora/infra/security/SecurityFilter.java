@@ -31,10 +31,10 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @PostConstruct
     private void init() {
-        freeEndpoints.add("/usuarios/registrar");
-        freeEndpoints.add("/usuarios/login");
-        freeEndpoints.add("/usuarios/redefinir-senha");
-        freeEndpoints.add("/usuarios/esqueceu-senha");
+        freeEndpoints.add("/users/registrar");
+        freeEndpoints.add("/users/login");
+        freeEndpoints.add("/users/redefinir-senha");
+        freeEndpoints.add("/users/esqueceu-senha");
     }
 
     @Override

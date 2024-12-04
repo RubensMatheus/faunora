@@ -7,9 +7,7 @@ import br.com.faunora.domain.models.ExameModel;
 import br.com.faunora.domain.models.PetModel;
 import br.com.faunora.domain.models.UserModel;
 import br.com.faunora.infra.exceptions.*;
-import br.com.faunora.repositories.ConsultaRepository;
-import br.com.faunora.repositories.PetRepository;
-import br.com.faunora.repositories.UserRepository;
+import br.com.faunora.repositories.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,6 +29,10 @@ public class ConsultaService {
     private UserRepository userRepository;
     @Autowired
     private HorarioService horarioService;
+    @Autowired
+    private ExameRepository exameRepository;
+    @Autowired
+    private DosagemRepository dosagemRepository;
 
     private UserModel getAuthenticatedUser() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -56,6 +58,12 @@ public class ConsultaService {
 
         if (!horarioService.isSlotValid(consultaRecordDto.hora())) {
             throw new HorarioIndisponivelException();
+        }
+
+        if (!consultaRepository.findAllByPacienteAndDataAndHora(pet, consultaRecordDto.data(), consultaRecordDto.hora()).isEmpty()
+            || !exameRepository.findAllByPacienteAndDataAndHora(pet, consultaRecordDto.data(), consultaRecordDto.hora()).isEmpty()
+            || !dosagemRepository.findAllByPacienteAndDataAndHora(pet, consultaRecordDto.data(), consultaRecordDto.hora()).isEmpty()) {
+            throw new PetIndisponivelException();
         }
 
         ConsultaModel consulta = new ConsultaModel();

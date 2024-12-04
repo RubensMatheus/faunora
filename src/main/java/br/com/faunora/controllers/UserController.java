@@ -6,14 +6,15 @@ import br.com.faunora.services.UserService;
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 
-import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/users")
 public class UserController {
 	@Autowired
     private UserService userService;
@@ -29,6 +30,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.validateUser(loginRequestRecordDto));
     }
 
+    @GetMapping
+    public ResponseEntity<List<UserModel>> getAllUsers() {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<UserModel> getUserById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
@@ -40,9 +46,9 @@ public class UserController {
     }
 
     @PatchMapping("/esqueceu-senha")
-    public ResponseEntity<RestMensagemRecordDto> esqueceuSenha(@RequestBody @NotBlank String email) throws MessagingException {
+    public ResponseEntity<RestMensagemRecordDto> esqueceuSenha(@RequestBody @Valid ForgotPasswordRecordDto forgotPasswordRecordDto) throws MessagingException {
         System.out.println("teste");
-        userService.esqueceuSenha(email);
+        userService.esqueceuSenha(forgotPasswordRecordDto.email());
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("email com código para atualização de senha enviado"));
     }
 

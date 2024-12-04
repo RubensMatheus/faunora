@@ -62,10 +62,12 @@ public class HorarioService {
 
     public boolean isSlotValid(LocalTime slot) {
         if (slot.getMinute() == 0 || slot.getMinute() == 30) {
-            if (slot.getHour() >= morningStart && slot.getHour() < morningEnd) {
-                return true;
-            } else if (slot.getHour() >= afternoonStart && slot.getHour() < afternoonEnd) {
-                return true;
+            if (slot.getSecond() == 0) {
+                if (slot.getHour() >= morningStart && slot.getHour() < morningEnd) {
+                    return true;
+                } else if (slot.getHour() >= afternoonStart && slot.getHour() < afternoonEnd) {
+                    return true;
+                }
             }
         }
 

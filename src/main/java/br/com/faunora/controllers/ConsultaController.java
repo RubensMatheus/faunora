@@ -34,6 +34,7 @@ public class ConsultaController {
         return ResponseEntity.status(HttpStatus.OK).body(consultaService.findById(id));
     }
 
+    @GetMapping("/tutor")
     public ResponseEntity<List<ConsultaModel>> getAllConsultas() {
         return ResponseEntity.status(HttpStatus.OK).body(consultaService.findAllByTutor());
     }

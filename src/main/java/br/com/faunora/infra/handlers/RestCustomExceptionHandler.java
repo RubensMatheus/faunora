@@ -44,7 +44,7 @@ public class RestCustomExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new RestMensagemRecordDto("usuário inexistente ou senha inválida"));
     }
 
-    @ExceptionHandler({SenhasNaoCoincidemException.class, HorarioIndisponivelException.class, VeterinarioInvalidoException.class})
+    @ExceptionHandler({PetIndisponivelException.class, CadastroLaudoInvalidoException.class, CadastroReceitaInvalidoException.class, NenhumVeterinarioDisponivelException.class, SenhasNaoCoincidemException.class, HorarioIndisponivelException.class, VeterinarioInvalidoException.class})
     public ResponseEntity<RestMensagemRecordDto> handleBadRequestException(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new RestMensagemRecordDto(ex.getMessage()));
     }
@@ -65,6 +65,7 @@ public class RestCustomExceptionHandler {
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler({ConstraintViolationException.class})
     public ResponseEntity<Map<String, String>> handleConstraintsException(ConstraintViolationException ex) {
         Map<String, String> errors = new LinkedHashMap<>();
         Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
@@ -78,19 +79,18 @@ public class RestCustomExceptionHandler {
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(SQLSyntaxErrorException.class)
+    @ExceptionHandler({SQLSyntaxErrorException.class})
     public ResponseEntity<RestMensagemRecordDto> handleSQLSyntaxErrorException(SQLSyntaxErrorException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new RestMensagemRecordDto("sem informacoes correspondentes no banco de dados"));
     }
 
-    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ExceptionHandler({HttpMessageNotReadableException.class})
     public ResponseEntity<RestMensagemRecordDto> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new RestMensagemRecordDto("dados nao legíveis em campos obrigatórios"));
     }
 
-    @ExceptionHandler(NoResourceFoundException.class)
+    @ExceptionHandler({NoResourceFoundException.class})
     public ResponseEntity<RestMensagemRecordDto> handleNoResourceFoundException(NoResourceFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new RestMensagemRecordDto("recurso nao encontrado"));
     }
-
 }
