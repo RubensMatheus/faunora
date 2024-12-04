@@ -1,13 +1,12 @@
 package br.com.faunora.domain.models;
 
 import br.com.faunora.domain.enums.DosagemTipo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "tb_dosagens")
@@ -32,7 +31,7 @@ public class DosagemModel implements Serializable {
     private LocalDate data;
 
     @Column(name = "dosagem_hora", nullable = false)
-    private Instant hora;
+    private LocalTime hora;
 
     @JoinColumn(name = "user_id", nullable = false)
     @ManyToOne(cascade = CascadeType.ALL)

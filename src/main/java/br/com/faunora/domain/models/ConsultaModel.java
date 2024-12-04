@@ -1,13 +1,12 @@
 package br.com.faunora.domain.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "tb_consultas", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "consulta_data", "consulta_hora"}), @UniqueConstraint(columnNames = {"pet_id", "consulta_data", "consulta_hora"})})
@@ -28,7 +27,7 @@ public class ConsultaModel implements Serializable {
     private LocalDate data;
 
     @Column(name = "consulta_hora", nullable = false)
-    private Instant hora;
+    private LocalTime hora;
 
     @JsonBackReference
     @JoinColumn(name = "receita_id", unique = true)

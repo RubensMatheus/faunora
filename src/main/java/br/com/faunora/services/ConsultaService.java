@@ -3,6 +3,7 @@ package br.com.faunora.services;
 import br.com.faunora.domain.dto.ConsultaRecordDto;
 import br.com.faunora.domain.enums.UserTipo;
 import br.com.faunora.domain.models.ConsultaModel;
+import br.com.faunora.domain.models.ExameModel;
 import br.com.faunora.domain.models.PetModel;
 import br.com.faunora.domain.models.UserModel;
 import br.com.faunora.infra.exceptions.*;
@@ -15,7 +16,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +29,12 @@ public class ConsultaService {
     private PetRepository petRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private HorarioService horarioService;
 
     private UserModel getAuthenticatedUser() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
+
         return userRepository.findByEmail(email)
                 .orElseThrow(UsuarioNaoEncontradoException::new);
     }
@@ -45,6 +50,14 @@ public class ConsultaService {
             throw new PetNaoEncontradoException("pet não disponível para consulta");
         }
 
+        if (!horarioService.isDateValid(consultaRecordDto.data())) {
+            throw new DataIndisponivelException();
+        }
+
+        if (!horarioService.isSlotValid(consultaRecordDto.hora())) {
+            throw new HorarioIndisponivelException();
+        }
+
         ConsultaModel consulta = new ConsultaModel();
         consulta.setPaciente(pet);
         consulta.setData(consultaRecordDto.data());
@@ -54,7 +67,11 @@ public class ConsultaService {
                 .orElseThrow(VeterinarioNaoEncontradoException::new);
 
         if (!veterinario.getTipo().equals(UserTipo.VETERINARIO)) {
-            throw new VeterinarioNaoEncontradoException("O veterinário não é válido");
+            throw new VeterinarioNaoEncontradoException("veterinário não é válido");
+        }
+
+        if (!horarioService.isSlotAvailableForVet(veterinario, consulta.getData(), consulta.getHora())) {
+            throw new HorarioIndisponivelException("horário indisponível para veterinário fornecido");
         }
 
         consulta.setVeterinario(veterinario);
@@ -63,25 +80,11 @@ public class ConsultaService {
     }
 
     public ConsultaModel findById(Long id) {
-        UserModel usuario = getAuthenticatedUser();
-
-        ConsultaModel consulta = consultaRepository.findById(id)
+        return consultaRepository.findById(id)
                 .orElseThrow(ConsultaNaoEncontradaException::new);
-
-        if (!petRepository.findAllByTutor(usuario).contains(consulta.getPaciente())) {
-            throw new PetNaoEncontradoException("pet não disponível para consulta");
-        }
-
-        // Consulta otimizada para verificar se o pet pertence ao tutor
-        boolean isPetOwnedByUser = petRepository.existsByIdAndTutor(consulta.getPaciente().getId(), usuario);
-        if (!isPetOwnedByUser) {
-            throw new PetNaoEncontradoException("pet não disponível para consulta");
-        }
-
-        return consulta;
     }
 
-    public List<ConsultaModel> findAll() {
+    public List<ConsultaModel> findAllByTutor() {
         UserModel usuario = getAuthenticatedUser();
         List<ConsultaModel> consultas = new ArrayList<>();
 
@@ -119,7 +122,7 @@ public class ConsultaService {
         UserModel veterinario = getAuthenticatedUser();
 
         if (!veterinario.getTipo().equals(UserTipo.VETERINARIO)) {
-            throw new VeterinarioNaoEncontradoException();
+            throw new VeterinarioNaoEncontradoException("usuário não é veterinário");
         }
 
         List<ConsultaModel> consultas = consultaRepository.findAllByVeterinario(veterinario);
@@ -131,28 +134,108 @@ public class ConsultaService {
         return consultas;
     }
 
-    public List<ConsultaModel> findAnteriores() {
-        List<ConsultaModel> consultas = this.findAll();
+    public List<ConsultaModel> findAnterioresVeterinario() {
+        List<ConsultaModel> consultas = this.findAllByVeterinario();
 
-        consultas.removeIf(consulta -> consulta.getData().isAfter(ChronoLocalDate.from(LocalDate.now())));
+        for (ConsultaModel consultaModel : consultas) {
+            LocalDateTime dataHora = LocalDateTime.of(consultaModel.getData(), consultaModel.getHora());
+
+            if (dataHora.isAfter(LocalDateTime.now())) {
+                consultas.remove(consultaModel);
+            }
+        }
 
         if (consultas.isEmpty()) {
-            throw new NenhumaConsultaEncontradaException("Nenhuma consulta anterior encontrada.");
+            throw new NenhumaConsultaEncontradaException("nenhuma consulta anterior encontrada.");
         }
 
         return consultas;
     }
 
-    public List<ConsultaModel> findMarcados() {
-        List<ConsultaModel> consultas = this.findAll();
+    public List<ConsultaModel> findAnteriores() {
+        List<ConsultaModel> consultas = this.findAllByTutor();
 
-        consultas.removeIf(exameModel -> exameModel.getData().isBefore(ChronoLocalDate.from(LocalDate.now())));
+        for (ConsultaModel consultaModel : consultas) {
+            LocalDateTime dataHora = LocalDateTime.of(consultaModel.getData(), consultaModel.getHora());
+
+            if (dataHora.isAfter(LocalDateTime.now())) {
+                consultas.remove(consultaModel);
+            }
+        }
+
+        if (consultas.isEmpty()) {
+            throw new NenhumaConsultaEncontradaException("nenhuma consulta anterior encontrada.");
+        }
+
+        return consultas;
+    }
+
+    public List<ConsultaModel> findMarcadosVeterinario() {
+        List<ConsultaModel> consultas = this.findAllByVeterinario();
+
+        for (ConsultaModel consultaModel : consultas) {
+            LocalDateTime dataHora = LocalDateTime.of(consultaModel.getData(), consultaModel.getHora());
+
+            if (dataHora.isBefore(LocalDateTime.now())) {
+                consultas.remove(consultaModel);
+            }
+        }
 
         if (consultas.isEmpty()) {
             throw new NenhumExameEncontradoException();
         }
 
         return consultas;
+    }
+
+    public List<ConsultaModel> findMarcados() {
+        List<ConsultaModel> consultas = this.findAllByTutor();
+
+        for (ConsultaModel consultaModel : consultas) {
+            LocalDateTime dataHora = LocalDateTime.of(consultaModel.getData(), consultaModel.getHora());
+
+            if (dataHora.isBefore(LocalDateTime.now())) {
+                consultas.remove(consultaModel);
+            }
+        }
+
+        if (consultas.isEmpty()) {
+            throw new NenhumExameEncontradoException();
+        }
+
+        return consultas;
+    }
+
+    public List<ConsultaModel> findAllByRandomVeterinario(String filter) {
+        List<ConsultaModel> consultaModelsByRandom = new ArrayList<>();
+
+        for (ConsultaModel consultaModel : this.findAllByVeterinario()) {
+            if (consultaModel.getData().toString().contains(filter) || consultaModel.getHora().toString().contains(filter) || consultaModel.getPaciente().getNome().contains(filter) || consultaModel.getVeterinario().getNome().contains(filter)) {
+                consultaModelsByRandom.add(consultaModel);
+            }
+        }
+
+        if (consultaModelsByRandom.isEmpty()) {
+            throw new NenhumExameEncontradoException("nenhum exame correspondente encontrado");
+        }
+
+        return consultaModelsByRandom;
+    }
+
+    public List<ConsultaModel> findAllByRandom(String filter) {
+        List<ConsultaModel> consultaModelsByRandom = new ArrayList<>();
+
+        for (ConsultaModel consultaModel : this.findAllByTutor()) {
+            if (consultaModel.getData().toString().contains(filter) || consultaModel.getHora().toString().contains(filter) || consultaModel.getPaciente().getNome().contains(filter) || consultaModel.getVeterinario().getNome().contains(filter)) {
+                consultaModelsByRandom.add(consultaModel);
+            }
+        }
+
+        if (consultaModelsByRandom.isEmpty()) {
+            throw new NenhumExameEncontradoException("nenhum exame correspondente encontrado");
+        }
+
+        return consultaModelsByRandom;
     }
 
     @Transactional
@@ -169,7 +252,7 @@ public class ConsultaService {
                 .orElseThrow(UsuarioNaoEncontradoException::new);
 
         if (!veterinario.getTipo().equals(UserTipo.VETERINARIO)) {
-            throw new UsuarioNaoEncontradoException("Usuário não é um veterinário válido");
+            throw new UsuarioNaoEncontradoException("usuário não é um veterinário válido");
         }
 
         consultaModel.setPaciente(petModel);
@@ -192,5 +275,27 @@ public class ConsultaService {
         }
 
         consultaRepository.delete(consulta);
+    }
+
+    public List<LocalDate> getDiasDisponiveisPorVet(Long veterinarioId) {
+        UserModel veterinario = userRepository.findById(veterinarioId)
+                .orElseThrow(VeterinarioNaoEncontradoException::new);
+
+        if (!veterinario.getTipo().equals(UserTipo.VETERINARIO)) {
+            throw new VeterinarioNaoEncontradoException("usuário não é um veterinário válido");
+        }
+
+        return horarioService.getDiasDisponiveisPorVet(veterinario);
+    }
+
+    public List<LocalTime> getHorariosDisponiveisPorDiaEVet(LocalDate data, Long veterinarioId) {
+        UserModel veterinario = userRepository.findById(veterinarioId)
+                .orElseThrow(VeterinarioNaoEncontradoException::new);
+
+        if (!veterinario.getTipo().equals(UserTipo.VETERINARIO)) {
+            throw new VeterinarioNaoEncontradoException("usuário não é um veterinário válido");
+        }
+
+        return horarioService.getSlotsDisponiveisPorVetEDia(veterinario, data);
     }
 }

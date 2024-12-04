@@ -25,6 +25,9 @@ spring:
 
 api:
   services:
+    maximum:
+      appointment:
+        range: 30
     time:
       duration: 30
     morning:

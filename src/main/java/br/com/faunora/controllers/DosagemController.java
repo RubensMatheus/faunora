@@ -30,29 +30,49 @@ public class DosagemController {
         return ResponseEntity.status(HttpStatus.OK).body(dosagemService.findById(id));
     }
 
-    @GetMapping
+    @GetMapping("/tutor")
     public ResponseEntity<List<DosagemModel>> getAllDosagens() {
-        return ResponseEntity.status(HttpStatus.OK).body(dosagemService.findAll());
+        return ResponseEntity.status(HttpStatus.OK).body(dosagemService.findAllByTutor());
     }
 
-    @GetMapping("/tipo")
+    @GetMapping("/vet")
+    public ResponseEntity<List<DosagemModel>> getAllDosagensVet() {
+        return ResponseEntity.status(HttpStatus.OK).body(dosagemService.findAllByVeterinario());
+    }
+
+    @GetMapping("/tutor/tipo")
     public ResponseEntity<List<DosagemModel>> getAllByTipo(@RequestParam DosagemTipo tipo) {
         return ResponseEntity.status(HttpStatus.OK).body(dosagemService.findAllByTipo(tipo));
     }
 
-    @GetMapping("/anteriores")
+    @GetMapping("/tutor/anteriores")
     public ResponseEntity<List<DosagemModel>> getAnteriores() {
         return ResponseEntity.status(HttpStatus.OK).body(dosagemService.findAnteriores());
     }
 
-    @GetMapping("/marcadas")
+    @GetMapping("/vet/anteriores")
+    public ResponseEntity<List<DosagemModel>> getAnterioresVet() {
+        return ResponseEntity.status(HttpStatus.OK).body(dosagemService.findAnterioresVeterinario());
+    }
+
+    @GetMapping("/tutor/marcadas")
     public ResponseEntity<List<DosagemModel>> getMarcadas() {
         return ResponseEntity.status(HttpStatus.OK).body(dosagemService.findMarcadas());
     }
 
-    @GetMapping("/{filter}")
+    @GetMapping("/vet/marcadas")
+    public ResponseEntity<List<DosagemModel>> getMarcadasVet() {
+        return ResponseEntity.status(HttpStatus.OK).body(dosagemService.findMarcadasVeterinario());
+    }
+
+    @GetMapping("/tutor/{filter}")
     public ResponseEntity<List<DosagemModel>> getAllByRandom(@PathVariable String filter) {
         return ResponseEntity.status(HttpStatus.OK).body(dosagemService.findAllByRandom(filter));
+    }
+
+    @GetMapping("/vet/{filter}")
+    public ResponseEntity<List<DosagemModel>> getAllByRandomVet(@PathVariable String filter) {
+        return ResponseEntity.status(HttpStatus.OK).body(dosagemService.findAllByRandomVeterinario(filter));
     }
 
     @GetMapping("/paciente/{id}")

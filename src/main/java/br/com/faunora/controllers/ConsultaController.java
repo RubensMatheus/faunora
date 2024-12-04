@@ -9,12 +9,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @RestController
 @RequestMapping("/consultas")
 public class ConsultaController {
-
     @Autowired
     private ConsultaService consultaService;
 
@@ -30,9 +31,24 @@ public class ConsultaController {
         return ResponseEntity.status(HttpStatus.OK).body(consultaService.findById(id));
     }
 
-    @GetMapping
+    @GetMapping("/tutor")
     public ResponseEntity<List<ConsultaModel>> getAllConsultas() {
-        return ResponseEntity.status(HttpStatus.OK).body(consultaService.findAll());
+        return ResponseEntity.status(HttpStatus.OK).body(consultaService.findAllByTutor());
+    }
+
+    @GetMapping("/vet")
+    public ResponseEntity<List<ConsultaModel>> getAllConsultasVet() {
+        return ResponseEntity.status(HttpStatus.OK).body(consultaService.findAllByVeterinario());
+    }
+
+    @GetMapping("/dias-disponiveis-vet/{id}")
+    public ResponseEntity<List<LocalDate>> getDiasDisponiveisVet(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(consultaService.getDiasDisponiveisPorVet(id));
+    }
+
+    @GetMapping("/horarios-disponiveis-vet/{id}/{data}")
+    public ResponseEntity<List<LocalTime>> getHorariosDisponiveisVet(@PathVariable Long id, @PathVariable LocalDate data) {
+        return ResponseEntity.status(HttpStatus.OK).body(consultaService.getHorariosDisponiveisPorDiaEVet(data, id));
     }
 
     @GetMapping("/paciente/{pacienteId}")
@@ -40,19 +56,34 @@ public class ConsultaController {
         return ResponseEntity.status(HttpStatus.OK).body(consultaService.findAllByPaciente(pacienteId));
     }
 
-    @GetMapping("/veterinario")
-    public ResponseEntity<List<ConsultaModel>> getConsultasByVeterinario() {
-        return ResponseEntity.status(HttpStatus.OK).body(consultaService.findAllByVeterinario());
-    }
-
-    @GetMapping("/anteriores")
+    @GetMapping("/tutor/anteriores")
     public ResponseEntity<List<ConsultaModel>> getConsultasAnteriores() {
         return ResponseEntity.status(HttpStatus.OK).body(consultaService.findAnteriores());
     }
 
-    @GetMapping("/marcados")
+    @GetMapping("/vet/anteriores")
+    public ResponseEntity<List<ConsultaModel>> getConsultasAnterioresVet() {
+        return ResponseEntity.status(HttpStatus.OK).body(consultaService.findAnterioresVeterinario());
+    }
+
+    @GetMapping("/tutor/marcados")
     public ResponseEntity<List<ConsultaModel>> getConsultasMarcadas() {
         return ResponseEntity.status(HttpStatus.OK).body(consultaService.findMarcados());
+    }
+
+    @GetMapping("/vet/marcados")
+    public ResponseEntity<List<ConsultaModel>> getConsultasMarcadosVet() {
+        return ResponseEntity.status(HttpStatus.OK).body(consultaService.findMarcadosVeterinario());
+    }
+
+    @GetMapping("/tutor/{filter}")
+    public ResponseEntity<List<ConsultaModel>> getAllByRandom(@PathVariable String filter) {
+        return ResponseEntity.status(HttpStatus.OK).body(consultaService.findAllByRandom(filter));
+    }
+
+    @GetMapping("/vet/{filter}")
+    public ResponseEntity<List<ConsultaModel>> getAllByRandomVet(@PathVariable String filter) {
+        return ResponseEntity.status(HttpStatus.OK).body(consultaService.findAllByRandomVeterinario(filter));
     }
 
     @PutMapping("/{id}")

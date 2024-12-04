@@ -2,13 +2,12 @@ package br.com.faunora.domain.models;
 
 import br.com.faunora.domain.enums.ExameTipo;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "tb_exames")
@@ -33,7 +32,7 @@ public class ExameModel implements Serializable {
     private LocalDate data;
 
     @Column(name = "exame_hora", nullable = false)
-    private Instant hora;
+    private LocalTime hora;
 
     @JsonBackReference
     @JoinColumn(name = "laudo_id")
