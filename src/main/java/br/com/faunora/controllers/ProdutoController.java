@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,21 +26,25 @@ public class ProdutoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new RestMensagemRecordDto("produto criado com sucesso"));
     }
 
+    @PreAuthorize("hasRole('ROLE_TUTOR')")
     @GetMapping("/{id}")
     public ResponseEntity<ProdutoModel> getProdutoById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(produtoService.findById(id));
     }
 
+    @PreAuthorize("hasRole('ROLE_TUTOR')")
     @GetMapping
     public ResponseEntity<List<ProdutoModel>> getAllProdutos() {
         return ResponseEntity.status(HttpStatus.OK).body(produtoService.findAll());
     }
 
+    @PreAuthorize("hasRole('ROLE_TUTOR')")
     @GetMapping("/categoria")
     public ResponseEntity<List<ProdutoModel>> getAllByCategoria(@RequestParam ProdutoTipo categoria) {
         return ResponseEntity.status(HttpStatus.OK).body(produtoService.findAllByCategoria(categoria));
     }
 
+    @PreAuthorize("hasRole('ROLE_TUTOR')")
     @GetMapping("/{filter}")
     public ResponseEntity<List<ProdutoModel>> getAllByRandom(@PathVariable String filter) {
         return ResponseEntity.status(HttpStatus.OK).body(produtoService.findAllByRandom(filter));

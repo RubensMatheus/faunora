@@ -14,6 +14,5 @@ public record UserRecordDto(
         @NotBlank(message = "a senha é obrigatória")
         @Size(min = 6, message = "a senha deve ter pelo menos 6 caracteres") String senha,
         @NotBlank(message = "a confirmação de senha é obrigatória") String confirmarSenha,
-        @NotNull(message = "o tipo de usuário é obrigatório") UserTipo tipo
-) {
+        @NotNull(message = "o tipo de usuário é obrigatório") UserTipo tipo) {
 }

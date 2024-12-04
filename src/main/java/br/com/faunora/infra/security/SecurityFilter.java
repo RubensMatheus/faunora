@@ -31,9 +31,10 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @PostConstruct
     private void init() {
-        freeEndpoints.add("/users/registrar");
-        freeEndpoints.add("/users/login");
-        freeEndpoints.add("/users/redefinir-senha");
+        freeEndpoints.add("/usuarios/registrar");
+        freeEndpoints.add("/usuarios/login");
+        freeEndpoints.add("/usuarios/redefinir-senha");
+        freeEndpoints.add("/usuarios/esqueceu-senha");
     }
 
     @Override
@@ -60,9 +61,9 @@ public class SecurityFilter extends OncePerRequestFilter {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userModel.get(), null, userModel.get().getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
-
-            filterChain.doFilter(request, response);
         }
+
+        filterChain.doFilter(request, response);
     }
 
     public String resolveToken(HttpServletRequest request) {

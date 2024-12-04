@@ -113,7 +113,7 @@ public class DosagemService {
                 .orElseThrow(UsuarioNaoEncontradoException::new);
 
         if (userModel.getTipo() != UserTipo.VETERINARIO) {
-            throw new VeterinarioNaoEncontradoException("usuário não é veterinário");
+            throw new VeterinarioInvalidoException("usuário não é veterinário");
         }
 
         List<DosagemModel> dosagemModels = dosagemRepository.findAllByVeterinario(userModel);

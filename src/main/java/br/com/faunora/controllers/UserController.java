@@ -3,24 +3,19 @@ package br.com.faunora.controllers;
 import br.com.faunora.domain.dto.*;
 import br.com.faunora.domain.models.UserModel;
 import br.com.faunora.services.UserService;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 
 import jakarta.validation.constraints.NotBlank;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Key;
-
 @RestController
 @RequestMapping("/usuarios")
 public class UserController {
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-	
-    @Autowired
+	@Autowired
     private UserService userService;
 
     @PostMapping("/registrar")
@@ -44,8 +39,9 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(id, userRecordDto));
     }
 
-    @PostMapping("esqueceu-senha")
-    public ResponseEntity<RestMensagemRecordDto> esqueceuSenha(@NotBlank String email) {
+    @PatchMapping("/esqueceu-senha")
+    public ResponseEntity<RestMensagemRecordDto> esqueceuSenha(@RequestBody @NotBlank String email) throws MessagingException {
+        System.out.println("teste");
         userService.esqueceuSenha(email);
         return ResponseEntity.status(HttpStatus.OK).body(new RestMensagemRecordDto("email com código para atualização de senha enviado"));
     }

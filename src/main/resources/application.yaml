@@ -12,15 +12,13 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: faunorasystem@gmail.com
-    password: faunora123
-    protocol: smtp
+    password: zqil maqd skjb hqja
     properties:
       mail:
         smtp:
           auth: true
           starttls:
             enable: true
-            required: true
 
 
 api:

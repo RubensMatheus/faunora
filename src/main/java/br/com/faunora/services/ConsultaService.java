@@ -67,7 +67,7 @@ public class ConsultaService {
                 .orElseThrow(VeterinarioNaoEncontradoException::new);
 
         if (!veterinario.getTipo().equals(UserTipo.VETERINARIO)) {
-            throw new VeterinarioNaoEncontradoException("veterinário não é válido");
+            throw new VeterinarioInvalidoException("veterinário não é válido");
         }
 
         if (!horarioService.isSlotAvailableForVet(veterinario, consulta.getData(), consulta.getHora())) {
@@ -122,7 +122,7 @@ public class ConsultaService {
         UserModel veterinario = getAuthenticatedUser();
 
         if (!veterinario.getTipo().equals(UserTipo.VETERINARIO)) {
-            throw new VeterinarioNaoEncontradoException("usuário não é veterinário");
+            throw new VeterinarioInvalidoException("usuário não é veterinário");
         }
 
         List<ConsultaModel> consultas = consultaRepository.findAllByVeterinario(veterinario);
@@ -282,7 +282,7 @@ public class ConsultaService {
                 .orElseThrow(VeterinarioNaoEncontradoException::new);
 
         if (!veterinario.getTipo().equals(UserTipo.VETERINARIO)) {
-            throw new VeterinarioNaoEncontradoException("usuário não é um veterinário válido");
+            throw new VeterinarioInvalidoException("usuário não é um veterinário válido");
         }
 
         return horarioService.getDiasDisponiveisPorVet(veterinario);
@@ -293,7 +293,7 @@ public class ConsultaService {
                 .orElseThrow(VeterinarioNaoEncontradoException::new);
 
         if (!veterinario.getTipo().equals(UserTipo.VETERINARIO)) {
-            throw new VeterinarioNaoEncontradoException("usuário não é um veterinário válido");
+            throw new VeterinarioInvalidoException("usuário não é um veterinário válido");
         }
 
         return horarioService.getSlotsDisponiveisPorVetEDia(veterinario, data);

@@ -112,7 +112,7 @@ public class ExameService {
                 .orElseThrow(UsuarioNaoEncontradoException::new);
 
         if (veterinario.getTipo() != UserTipo.VETERINARIO) {
-            throw new VeterinarioNaoEncontradoException("usuário não é veterinário");
+            throw new VeterinarioInvalidoException("usuário não é veterinário");
         }
 
         List<ExameModel> exameModels = exameRepository.findAllByVeterinario(veterinario);

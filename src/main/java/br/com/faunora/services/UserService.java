@@ -5,6 +5,7 @@ import br.com.faunora.domain.models.UserModel;
 import br.com.faunora.infra.exceptions.*;
 import br.com.faunora.infra.security.TokenService;
 import br.com.faunora.repositories.UserRepository;
+import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -173,12 +173,13 @@ public class UserService {
         return new UpdateUserResponseRecordDto(userModel.getEmail(), token);
     }
 
-    public void esqueceuSenha(String email) {
+    public void esqueceuSenha(String email) throws MessagingException {
+        System.out.println(email);
         UserModel userModel = userRepository.findByEmail(email)
                 .orElseThrow(UsuarioNaoEncontradoException::new);
 
         String resetToken = tokenService.generateToken(userModel);
-        emailService.sendPasswordResetEmail(userModel.getEmail(), resetToken);
+        emailService.sendPasswordResetEmail(email, resetToken);
     }
 
     @Transactional
