@@ -173,8 +173,7 @@ public class UserService {
         return new UpdateUserResponseRecordDto(userModel.getEmail(), token);
     }
 
-    public void esqueceuSenha(String email) throws MessagingException {
-        System.out.println(email);
+    public void esqueceuSenha(String email) {
         UserModel userModel = userRepository.findByEmail(email)
                 .orElseThrow(UsuarioNaoEncontradoException::new);
 

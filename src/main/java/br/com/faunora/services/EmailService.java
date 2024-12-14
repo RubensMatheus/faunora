@@ -12,10 +12,12 @@ public class EmailService {
 
     public void sendPasswordResetEmail(String to, String token) {
         SimpleMailMessage message = new SimpleMailMessage();
+
         message.setTo(to);
         message.setSubject("redefinição de senha");
         message.setText("o link para a redefinição de senha do seu perfil no faunora é: " + token);
         message.setFrom("faunorasystem@gmail.com");
+
         mailSender.send(message);
     }
 }
