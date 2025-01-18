@@ -5,7 +5,6 @@ import br.com.faunora.domain.models.UserModel;
 import br.com.faunora.infra.exceptions.users.*;
 import br.com.faunora.infra.security.TokenService;
 import br.com.faunora.repositories.UserRepository;
-import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

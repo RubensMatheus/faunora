@@ -1,0 +1,1028 @@
+.meuspets-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+ 
+.meuspets-meuspets {
+  width: 100%;
+  height: 1252px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 1);
+}
+ 
+.meuspets-frame6 {
+  top: 136px;
+  left: 0px;
+  width: 1440px;
+  height: 556px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  background-color: rgba(55, 57, 24, 0.46000000834465027);
+}
+ 
+.meuspets-search-bar {
+  top: 495px;
+  left: 553px;
+  width: 335px;
+  height: 40px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+ 
+.meuspets-barradepesquisa {
+  gap: 10px;
+  top: 0px;
+  left: 0px;
+  width: 335px;
+  height: 40px;
+  display: flex;
+  padding: 12px 40px;
+  position: absolute;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: rgba(84, 86, 47, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 50px;
+  justify-content: center;
+}
+ 
+.meuspets-search1 {
+  top: 10px;
+  left: 300px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+}
+ 
+.meuspets-text10 {
+  top: 12px;
+  left: 13px;
+  color: rgba(84, 86, 47, 1);
+  height: auto;
+  position: absolute;
+  font-size: 12px;
+  font-style: Semi Bold;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-text11 {
+  top: 242px;
+  left: 0px;
+  color: rgba(255, 249, 238, 1);
+  right: 0px;
+  width: 1046px;
+  text-shadow: 0.5px 0.5px 5px rgba(0, 0, 0, 0.5);
+  height: auto;
+  margin: auto;
+  position: absolute;
+  font-size: 128px;
+  font-style: Semi Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-text12 {
+  top: 377px;
+  left: 465px;
+  color: rgba(255, 249, 238, 1);
+  width: 511px;
+  height: auto;
+  position: absolute;
+  text-shadow: 0.5px 0.5px 3px rgba(0, 0, 0, 0.5);
+  font-size: 24px;
+  font-style: Medium;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-boto10 {
+  top: 444px;
+  left: 601px;
+  width: 239px;
+  height: 42px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 40px;
+  background-color: rgba(84, 86, 47, 1);
+}
+ 
+.meuspets-text13 {
+  top: 11px;
+  left: 50px;
+  color: rgba(255, 249, 238, 1);
+  height: auto;
+  position: absolute;
+  font-size: 16px;
+  font-style: Semi Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-boto11 {
+  top: 730px;
+  left: 119px;
+  width: 212px;
+  height: 42px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: rgba(84, 86, 47, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 50px;
+}
+ 
+.meuspets-text14 {
+  top: 11px;
+  color: rgba(84, 86, 47, 1);
+  width: 212px;
+  height: auto;
+  position: absolute;
+  font-size: 16px;
+  font-style: Semi Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-boto12 {
+  top: 730px;
+  left: 340px;
+  width: 212px;
+  height: 42px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: rgba(84, 86, 47, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 50px;
+}
+ 
+.meuspets-text15 {
+  top: 11px;
+  color: rgba(84, 86, 47, 1);
+  width: 212px;
+  height: auto;
+  position: absolute;
+  font-size: 16px;
+  font-style: Semi Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-navbarcliente {
+  top: 0px;
+  left: 0px;
+  width: 1440px;
+  height: 136px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 1);
+}
+ 
+.meuspets-line1 {
+  top: 136px;
+  left: 0px;
+  width: 1440px;
+  height: 1px;
+  position: absolute;
+}
+ 
+.meuspets-text16 {
+  top: 53px;
+  left: 865px;
+  color: rgba(67, 67, 67, 1);
+  height: auto;
+  position: absolute;
+  font-size: 24px;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-text17 {
+  top: 53px;
+  left: 1155px;
+  color: rgba(67, 67, 67, 1);
+  height: auto;
+  position: absolute;
+  font-size: 24px;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-text18 {
+  top: 53px;
+  left: 709px;
+  color: rgba(67, 67, 67, 1);
+  height: auto;
+  position: absolute;
+  font-size: 24px;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-text19 {
+  top: 53px;
+  left: 1025px;
+  color: rgba(67, 67, 67, 1);
+  height: auto;
+  position: absolute;
+  font-size: 24px;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-text20 {
+  top: 53px;
+  left: 579px;
+  color: rgba(67, 67, 67, 1);
+  height: auto;
+  position: absolute;
+  font-size: 24px;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-text21 {
+  top: 53px;
+  left: 435px;
+  color: rgba(67, 67, 67, 1);
+  height: auto;
+  position: absolute;
+  font-size: 24px;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-logo {
+  top: 34px;
+  left: 95px;
+  width: 48px;
+  height: 68px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+ 
+.meuspets-frame20 {
+  top: 0px;
+  left: 0px;
+  width: 24px;
+  height: 22px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 100px 0 0 100px;
+  background-color: rgba(71, 92, 54, 1);
+}
+ 
+.meuspets-frame24 {
+  top: 0px;
+  left: 24px;
+  width: 24px;
+  height: 22px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 0 100px 100px 0;
+  background-color: rgba(146, 151, 129, 1);
+}
+ 
+.meuspets-frame21 {
+  top: 22px;
+  left: 0px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 100px 0 0 100px;
+  background-color: rgba(151, 166, 126, 1);
+}
+ 
+.meuspets-frame23 {
+  top: 22px;
+  left: 24px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 100px;
+  background-color: rgba(74, 94, 56, 1);
+}
+ 
+.meuspets-frame22 {
+  top: 46px;
+  left: 0px;
+  width: 24px;
+  height: 22px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 100px 0 100px 100px;
+  background-color: rgba(55, 70, 40, 1);
+}
+ 
+.meuspets-botopadrofontemaior {
+  top: 41px;
+  left: 1256px;
+  width: 89px;
+  height: 53px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+ 
+.meuspets-boto13 {
+  top: 0px;
+  left: 0px;
+  width: 89px;
+  height: 53px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 40px;
+  background-color: rgba(84, 86, 47, 1);
+}
+ 
+.meuspets-text22 {
+  top: 13px;
+  left: 21px;
+  color: rgba(255, 249, 238, 1);
+  height: auto;
+  position: absolute;
+  font-size: 22px;
+  font-style: Semi Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-card1 {
+  top: 810px;
+  left: 206px;
+  width: 170px;
+  height: 268px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+ 
+.meuspets-text23 {
+  top: 179px;
+  left: 48px;
+  color: rgba(84, 86, 47, 1);
+  height: auto;
+  position: absolute;
+  font-size: 24px;
+  font-style: Semi Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-rectangle1 {
+  top: 0px;
+  left: 0px;
+  width: 170px;
+  height: 170px;
+  position: absolute;
+  border-color: rgba(55, 57, 25, 1);
+  border-radius: 200px;
+}
+ 
+.meuspets-botopadro1 {
+  top: 219px;
+  left: 20px;
+  width: 129px;
+  height: 22px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+ 
+.meuspets-boto14 {
+  top: 0px;
+  left: 0px;
+  width: 129px;
+  height: 22px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 40px;
+  background-color: rgba(84, 86, 47, 1);
+}
+ 
+.meuspets-text24 {
+  top: 1px;
+  left: 37px;
+  color: rgba(255, 249, 238, 1);
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  font-style: Semi Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-botovazado1 {
+  top: 246px;
+  left: 20px;
+  width: 129px;
+  height: 22px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+ 
+.meuspets-boto15 {
+  top: 0px;
+  left: 0px;
+  width: 129px;
+  height: 22px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: rgba(84, 86, 47, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 40px;
+  background-color: rgba(255, 255, 255, 1);
+}
+ 
+.meuspets-text25 {
+  top: 1px;
+  left: 41px;
+  color: rgba(84, 86, 47, 1);
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  font-style: Semi Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-card2 {
+  top: 810px;
+  left: 492px;
+  width: 170px;
+  height: 268px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+ 
+.meuspets-text26 {
+  top: 179px;
+  left: 49px;
+  color: rgba(84, 86, 47, 1);
+  height: auto;
+  position: absolute;
+  font-size: 24px;
+  font-style: Semi Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-rectangle2 {
+  top: 0px;
+  left: 0px;
+  width: 170px;
+  height: 170px;
+  position: absolute;
+  border-color: rgba(55, 57, 25, 1);
+  border-radius: 200px;
+}
+ 
+.meuspets-botopadro2 {
+  top: 219px;
+  left: 20px;
+  width: 129px;
+  height: 22px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+ 
+.meuspets-boto16 {
+  top: 0px;
+  left: 0px;
+  width: 129px;
+  height: 22px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 40px;
+  background-color: rgba(84, 86, 47, 1);
+}
+ 
+.meuspets-text27 {
+  top: 1px;
+  left: 37px;
+  color: rgba(255, 249, 238, 1);
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  font-style: Semi Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-botovazado2 {
+  top: 246px;
+  left: 20px;
+  width: 129px;
+  height: 22px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+ 
+.meuspets-boto17 {
+  top: 0px;
+  left: 0px;
+  width: 129px;
+  height: 22px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: rgba(84, 86, 47, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 40px;
+  background-color: rgba(255, 255, 255, 1);
+}
+ 
+.meuspets-text28 {
+  top: 1px;
+  left: 41px;
+  color: rgba(84, 86, 47, 1);
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  font-style: Semi Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-card3 {
+  top: 810px;
+  left: 778px;
+  width: 170px;
+  height: 268px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+ 
+.meuspets-text29 {
+  top: 179px;
+  left: 51px;
+  color: rgba(84, 86, 47, 1);
+  height: auto;
+  position: absolute;
+  font-size: 24px;
+  font-style: Semi Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-rectangle3 {
+  top: 0px;
+  left: 0px;
+  width: 170px;
+  height: 170px;
+  position: absolute;
+  border-color: rgba(55, 57, 25, 1);
+  border-radius: 200px;
+}
+ 
+.meuspets-botopadro3 {
+  top: 219px;
+  left: 20px;
+  width: 129px;
+  height: 22px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+ 
+.meuspets-boto18 {
+  top: 0px;
+  left: 0px;
+  width: 129px;
+  height: 22px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 40px;
+  background-color: rgba(84, 86, 47, 1);
+}
+ 
+.meuspets-text30 {
+  top: 1px;
+  left: 37px;
+  color: rgba(255, 249, 238, 1);
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  font-style: Semi Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-botovazado3 {
+  top: 246px;
+  left: 20px;
+  width: 129px;
+  height: 22px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+ 
+.meuspets-boto19 {
+  top: 0px;
+  left: 0px;
+  width: 129px;
+  height: 22px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: rgba(84, 86, 47, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 40px;
+  background-color: rgba(255, 255, 255, 1);
+}
+ 
+.meuspets-text31 {
+  top: 1px;
+  left: 41px;
+  color: rgba(84, 86, 47, 1);
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  font-style: Semi Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-card4 {
+  top: 810px;
+  left: 1064px;
+  width: 170px;
+  height: 268px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+ 
+.meuspets-text32 {
+  top: 179px;
+  left: 36px;
+  color: rgba(84, 86, 47, 1);
+  height: auto;
+  position: absolute;
+  font-size: 24px;
+  font-style: Semi Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-rectangle4 {
+  top: 0px;
+  left: 0px;
+  width: 170px;
+  height: 170px;
+  position: absolute;
+  border-color: rgba(55, 57, 25, 1);
+  border-radius: 200px;
+}
+ 
+.meuspets-botopadro4 {
+  top: 219px;
+  left: 20px;
+  width: 129px;
+  height: 22px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+ 
+.meuspets-boto20 {
+  top: 0px;
+  left: 0px;
+  width: 129px;
+  height: 22px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 40px;
+  background-color: rgba(84, 86, 47, 1);
+}
+ 
+.meuspets-text33 {
+  top: 1px;
+  left: 37px;
+  color: rgba(255, 249, 238, 1);
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  font-style: Semi Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-botovazado4 {
+  top: 246px;
+  left: 20px;
+  width: 129px;
+  height: 22px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+ 
+.meuspets-boto21 {
+  top: 0px;
+  left: 0px;
+  width: 129px;
+  height: 22px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: rgba(84, 86, 47, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 40px;
+  background-color: rgba(255, 255, 255, 1);
+}
+ 
+.meuspets-text34 {
+  top: 1px;
+  left: 41px;
+  color: rgba(84, 86, 47, 1);
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  font-style: Semi Bold;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+ 
+.meuspets-line2 {
+  top: 1152px;
+  left: 0px;
+  width: 1440px;
+  height: 1px;
+  position: absolute;
+}
+ 
+.meuspets-frame31 {
+  top: 1152px;
+  left: 0px;
+  width: 1440px;
+  height: 100px;
+  display: flex;
+  overflow: hidden;
+  border-top: 0.3px solid #7b7b7b;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 1);
+}
+ 
+.meuspets-text35 {
+  top: 35px;
+  left: 454px;
+  color: rgba(163, 164, 149, 1);
+  height: auto;
+  position: absolute;
+  font-size: 24px;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+
+.meuspets-boto10:hover, .meuspets-boto13:hover, .meuspets-boto14:hover, .meuspets-boto16:hover, .meuspets-boto18:hover,
+.meuspets-boto20:hover {
+  background-color: #373919;
+}
+
+.meuspets-boto11:hover, .meuspets-boto12:hover, .meuspets-boto15:hover, .meuspets-boto17:hover, .meuspets-boto19:hover,
+.meuspets-boto21:hover {
+  background-color: rgba(84, 86, 47, 1);
+}
+
+.meuspets-boto11:hover .meuspets-text14, .meuspets-boto12:hover .meuspets-text15, .meuspets-boto15:hover .meuspets-text25,
+.meuspets-boto17:hover .meuspets-text28, .meuspets-boto19:hover .meuspets-text31, .meuspets-boto21:hover .meuspets-text35 {
+  color: rgba(255, 249, 238, 1);
+}
+
+.meuspets-text16:hover, .meuspets-text17:hover, .meuspets-text18:hover, .meuspets-text19:hover, .meuspets-text20:hover, .meuspets-text21:hover {
+  text-decoration: underline;
+}
+
+.meuspets-text10 {
+  top: 12px;
+  left: 13px;
+  width: 280px;
+  color: rgba(84, 86, 47, 1);
+  background-color: transparent;
+  height: auto;
+  position: absolute;
+  font-size: 12px;
+  font-style: Semi Bold;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+
+.meuspets-text10::placeholder {
+  color: rgba(84, 86, 47, 1);
+  font-weight: 700;
+}
+
+.meuspets-text10:focus::placeholder {
+  color: transparent;
+}
