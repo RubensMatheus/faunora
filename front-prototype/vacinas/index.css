@@ -9,7 +9,7 @@
  
 .home-consultas-cliente {
   width: 1440px;
-  height: 1185px;
+  height: 1150px;
   display: flex;
   overflow: hidden;
   position: relative;
@@ -251,7 +251,7 @@
   top: 825px;
   left: 114px;
   width: 276px;
-  height: 185px;
+  height: 155px;
   display: flex;
   position: absolute;
   align-items: flex-start;
@@ -262,7 +262,7 @@
   top: 0px;
   left: 0px;
   width: 276px;
-  height: 185px;
+  height: 155px;
   display: flex;
   overflow: hidden;
   position: absolute;
@@ -386,7 +386,7 @@
   top: 825px;
   left: 426px;
   width: 276px;
-  height: 185px;
+  height: 155px;
   display: flex;
   position: absolute;
   align-items: flex-start;
@@ -397,7 +397,7 @@
   top: 0px;
   left: 0px;
   width: 276px;
-  height: 185px;
+  height: 155px;
   display: flex;
   overflow: hidden;
   position: absolute;
@@ -520,7 +520,7 @@
   top: 825px;
   left: 738px;
   width: 276px;
-  height: 185px;
+  height: 155px;
   display: flex;
   position: absolute;
   align-items: flex-start;
@@ -531,7 +531,7 @@
   top: 0px;
   left: 0px;
   width: 276px;
-  height: 185px;
+  height: 155px;
   display: flex;
   overflow: hidden;
   position: absolute;
@@ -654,7 +654,7 @@
   top: 825px;
   left: 1050px;
   width: 276px;
-  height: 185px;
+  height: 155px;
   display: flex;
   position: absolute;
   align-items: flex-start;
@@ -665,7 +665,7 @@
   top: 0px;
   left: 0px;
   width: 276px;
-  height: 185px;
+  height: 155px;
   display: flex;
   overflow: hidden;
   position: absolute;
@@ -1032,7 +1032,7 @@
 }
  
 .home-frame31 {
-  top: 1085px;
+  top: 1050px;
   left: 0px;
   width: 1440px;
   height: 100px;
