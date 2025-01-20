@@ -16,6 +16,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/consultas")
 public class ConsultaController {
     @Autowired

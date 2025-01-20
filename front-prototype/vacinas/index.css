@@ -262,7 +262,7 @@
   top: 0px;
   left: 0px;
   width: 276px;
-  height: 155px;
+  height: 143px;
   display: flex;
   overflow: hidden;
   position: absolute;
@@ -397,7 +397,7 @@
   top: 0px;
   left: 0px;
   width: 276px;
-  height: 155px;
+  height: 143px;
   display: flex;
   overflow: hidden;
   position: absolute;
@@ -531,7 +531,7 @@
   top: 0px;
   left: 0px;
   width: 276px;
-  height: 155px;
+  height: 143px;
   display: flex;
   overflow: hidden;
   position: absolute;
@@ -654,7 +654,7 @@
   top: 825px;
   left: 1050px;
   width: 276px;
-  height: 155px;
+  height: 150px;
   display: flex;
   position: absolute;
   align-items: flex-start;
@@ -665,7 +665,24 @@
   top: 0px;
   left: 0px;
   width: 276px;
-  height: 155px;
+  height: 143px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  box-shadow: 2px 2px 4px 0px rgba(55, 57, 25, 1) ;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: rgba(84, 86, 47, 1);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 30px;
+}
+
+.home-borda5, .home-borda6, .home-borda7, .home-borda8 {
+  top: 0px;
+  left: 0px;
+  width: 276px;
+  height: 180px;
   display: flex;
   overflow: hidden;
   position: absolute;

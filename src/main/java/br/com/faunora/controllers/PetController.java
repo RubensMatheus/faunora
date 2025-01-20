@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/pets")
 public class PetController {
     @Autowired
