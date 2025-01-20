@@ -1,0 +1,419 @@
+/* Reset e Estilos Básicos */
+.login-container {
+    width: 100%;
+    display: flex;
+    overflow: auto;
+    min-height: 100vh;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .login-editarnomecliente {
+    width: 100%;
+    height: 1024px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    align-items: flex-start;
+    flex-shrink: 0;
+    background-color: rgba(255, 255, 255, 1);
+  }
+  
+  .login-formulrio {
+    top: 276px;
+    left: 489px;
+    width: 441px;
+    height: 471px;
+    display: flex;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 0;
+  }
+  
+  /* Textos */
+  .login-text10 {
+    top: 361px;
+    color: rgba(123, 123, 123, 1);
+    height: auto;
+    position: absolute;
+    font-size: 16px;
+    font-style: normal;
+    text-align: left;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  
+  .login-text11 {
+    color: rgba(123, 123, 123, 1);
+    font-weight: 400;
+  }
+  
+  .login-text28 {
+    color: rgba(84, 86, 47, 1);
+    height: auto;
+    font-size: 16px;
+    font-style: normal;
+    text-align: left;
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .login-text28:hover {
+    text-decoration: underline;
+  }
+  
+  .login-text13 {
+    color: rgba(123, 123, 123, 1);
+    height: auto;
+    font-size: 16px;
+    font-style: medium;
+    text-align: left;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  
+  .login-text14 {
+    top: 15.5px;
+    left: 26px;
+    color: rgba(67, 67, 67, 1);
+    height: auto;
+    position: absolute;
+    width: 380px;
+    font-size: 18px;
+    font-style: medium;
+    text-align: left;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  
+  .login-novasenha {
+    top: 206px;
+    left: 0px;
+    width: 441px;
+    height: 51px;
+    display: flex;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-color: rgba(123, 123, 123, 1);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 8px;
+  }
+  
+  .login-texto1,
+  .login-texto2,
+  .login-texto3 {
+    gap: 8px;
+    display: flex;
+    padding: 0 8px;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 1);
+  }
+  
+  .login-texto1 {
+    top: -10px;
+    left: 20px;
+    width: 147px;
+  }
+  
+  .login-texto2 {
+    top: -9px;
+    left: 18px;
+    width: 104px;
+  }
+  
+  .login-texto3 {
+    top: -9px;
+    left: 18px;
+    width: 64px;
+  }
+  
+  .login-text15,
+  .login-text17 {
+    color: rgba(123, 123, 123, 1);
+    height: auto;
+    font-size: 16px;
+    font-style: medium;
+    text-align: left;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  
+  .login-text18 {
+    top: 15.5px;
+    left: 26px;
+    color: rgba(67, 67, 67, 1);
+    height: auto;
+    position: absolute;
+    font-size: 18px;
+    font-style: medium;
+    text-align: left;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  
+  .login-senha {
+    top: 116px;
+    left: 0px;
+    width: 441px;
+    height: 51px;
+    display: flex;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-color: rgba(123, 123, 123, 1);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 8px;
+  }
+  
+  .login-svg-repoicon-carrier {
+    top: 16.5px;
+    left: 407px;
+    width: 22.033687591552734px;
+    height: 15.149749755859375px;
+    display: flex;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 1;
+  }
+  
+  .login-vector {
+    top: 0px;
+    left: 0px;
+    width: 22px;
+    height: 15px;
+    position: absolute;
+  }
+  
+  .login-text19 {
+    top: -11px;
+    left: 1px;
+    color: rgba(67, 67, 67, 1);
+    width: 440px;
+    height: auto;
+    position: absolute;
+    font-size: 50px;
+    font-style: bold;
+    text-align: center;
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  
+  .login-botopadrofontemaior1,
+  .login-botopadrofontemaior2 {
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+  }
+  
+  .login-boto1,
+  .login-boto2 {
+    top: 0px;
+    left: 0px;
+    display: flex;
+    overflow: hidden;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-radius: 40px;
+    background-color: rgba(84, 86, 47, 1);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-boto1 {
+    width: 300px;
+    height: 45px;
+  }
+  
+  .login-boto2 {
+    width: 89px;
+    height: 53px;
+  }
+  
+  .login-text20,
+  .login-text27 {
+    color: rgba(255, 249, 238, 1);
+    height: auto;
+    font-size: 22px;
+    font-style: semi-bold;
+    text-align: center;
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  
+  .login-text20:hover,
+  .login-text27:hover {
+    text-decoration: underline;
+  }
+  
+  .login-navbarcliente {
+    top: 0px;
+    left: 0px;
+    width: 1440px;
+    height: 136px;
+    display: flex;
+    border-color: #7b7b7b;
+    border-width: 0.1px;
+    background-color: rgba(255, 255, 255, 1);
+    border-top-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0.7px;
+    overflow: hidden;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 0;
+  }
+  
+  .login-line1 {
+    top: 136px;
+    left: 0px;
+    width: 1440px;
+    height: 1px;
+    position: absolute;
+  }
+  
+  .login-text29,
+  .login-text30,
+  .login-text31,
+  .login-text32 {
+    position: absolute;
+    top: 53px;
+    color: rgba(67, 67, 67, 1);
+    font-size: 24px;
+    font-style: medium;
+    text-align: left;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .login-text29 { left: 1155px; }
+  .login-text30 { left: 869px; }
+  .login-text31 { left: 1025px; }
+  .login-text32 { left: 739px; }
+  
+  .login-text29:hover,
+  .login-text30:hover,
+  .login-text31:hover,
+  .login-text32:hover,
+  .login-text21:hover,
+  .login-text22:hover,
+  .login-text23:hover,
+  .login-text24:hover,
+  .login-text25:hover,
+  .login-text26:hover { 
+    text-decoration: underline;
+  }
+  
+  .login-logo {
+    top: 34px;
+    left: 95px;
+    width: 48px;
+    height: 68px;
+    display: flex;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 0;
+  }
+  
+  .login-frame20,
+  .login-frame24,
+  .login-frame21,
+  .login-frame23,
+  .login-frame22 {
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+    border-radius: 100px;
+  }
+  
+  .login-frame20 {
+    top: 0px;
+    left: 0px;
+    width: 24px;
+    height: 22px;
+    background-color: rgba(71, 92, 54, 1);
+  }
+  
+  .login-frame24 {
+    top: 0px;
+    left: 24px;
+    width: 24px;
+    height: 22px;
+    border-radius: 0 100px 100px 0;
+    background-color: rgba(146, 151, 129, 1);
+  }
+  
+  .login-frame21 {
+    top: 22px;
+    left: 0px;
+    width: 24px;
+    height: 24px;
+    border-radius: 100px 0 0 100px;
+    background-color: rgba(151, 166, 126, 1);
+  }
+  
+  .login-frame23 {
+    top: 22px;
+    left: 24px;
+    width: 24px;
+    height: 24px;
+    border-radius: 100px;
+    background-color: rgba(74, 94, 56, 1);
+  }
+  
+  .login-frame22 {
+    top: 46px;
+    left: 0px;
+    width: 24px;
+    height: 22px;
+    border-radius: 100px 0 100px 100px;
+    background-color: rgba(55, 70, 40, 1);
+  }
+  
+  .login-botopadrofontemaior2 {
+    top: 41px;
+    left: 1256px;
+    width: 89px;
+    height: 53px;
+    display: flex;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 0;
+  }
+  

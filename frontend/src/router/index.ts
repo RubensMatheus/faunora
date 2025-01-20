@@ -14,6 +14,12 @@ import HomeTutor from '../components/HomeTutor.vue';
 import HomeVet from '../components/HomeVet.vue';
 import VacinaTutor from '../components/VacinaTutor.vue';
 import VacinaVet from '../components/VacinaVet.vue';
+import EditarEmailTutor from '../components/EditarEmailTutor.vue';
+import EditarEmailVet from '../components/EditarEmailVet.vue';
+import EditarNomeTutor from '../components/EditarNomeTutor.vue';
+import EditarNomeVet from '../components/EditarNomeVet.vue';
+import EditarSenhaTutor from '../components/EditarSenhaTutor.vue';
+import EditarSenhaVet from '../components/EditarSenhaVet.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -85,6 +91,38 @@ const routes: Array<RouteRecordRaw> = [
     path: '/vacina-vet',
     name: 'VacinaVet',
     component: VacinaVet,
+  },
+  {
+    path: '/editar-email-tutor',
+    name: 'EditarEmailTutor',
+    component: EditarEmailTutor,
+  },
+  {
+    path: '/editar-email-vet',
+    name: 'EditarEmailVet',
+    component: EditarEmailVet,
+  },
+  {
+    path: '/editar-nome-tutor',
+    name: 'EditarNomeTutor',
+    component: EditarNomeTutor,
+  },
+  {
+    path: '/editar-nome-vet',
+    name: 'EditarNomeVet',
+    component: EditarNomeVet,
+  },
+  {
+    path: '/editar-senha-tutor',
+    name: 'EditarSenhaTutor',
+    component: EditarSenhaTutor,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/editar-senha-vet',
+    name: 'EditarSenhaVet',
+    component: EditarSenhaVet,
+    meta: { requiresAuth: true },
   },
 ];
 
