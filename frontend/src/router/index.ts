@@ -76,11 +76,13 @@ const routes: Array<RouteRecordRaw> = [
     path: '/home-tutor',
     name: 'HomeTutor',
     component: HomeTutor,
+    meta: { requiresAuth: true, role: 'TUTOR' },
   },
   {
     path: '/home-vet',
     name: 'HomeVet',
     component: HomeVet,
+    meta: { requiresAuth: true, role: 'VETERINARIO' },
   },
   {
     path: '/vacina-tutor',
@@ -129,6 +131,37 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
+});
+
+// router.beforeEach((to, from, next) => {
+//   const isAuthenticated = !!sessionStorage.getItem('authToken'); // Verifica se o token existe
+//   if (to.meta.requiresAuth && !isAuthenticated) {
+//     alert('Você precisa estar autenticado para acessar esta página.');
+//     next('/'); // Redireciona para o login
+//   } else {
+//     next(); // Permite a navegação
+//   }
+// });
+
+router.beforeEach((to, from, next) => {
+  const token = sessionStorage.getItem('authToken');
+  const userTipo = sessionStorage.getItem('userTipo');
+
+  if (to.meta.requiresAuth) {
+    if (!token) {
+      alert('Você precisa estar autenticado para acessar esta página.');
+      next('/');
+      return;
+    }
+
+    if (to.meta.role && to.meta.role !== userTipo) {
+      alert('Você não tem permissão para acessar esta página.');
+      next('/');
+      return;
+    }
+  }
+
+  next();
 });
 
 export default router;
