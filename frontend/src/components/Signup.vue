@@ -84,63 +84,118 @@
             />
           </div>
           <span class="login-text23">Criar Conta</span>
+          <!-- <div class="login-botopadrofontemaior"> -->
+          
+          <!-- </div> -->
           <div class="login-botopadrofontemaior">
             <button class="login-boto" @click="cadastrar">
               <span class="login-text24">CADASTRAR</span>
             </button>
+            <div class="home-sexo">
+            <div class="home-validadedo-laudo2">
+              <span class="home-text21">Tipo conta:</span>
+            </div>
+            <div class="radio-group">
+              <label class="radio-item">
+                <input 
+                  type="radio" 
+                  name="tipo" 
+                  value="TUTOR" 
+                  v-model="tipo" 
+                />
+                <span class="custom-radio"></span>
+                TUTOR
+              </label>
+              <label class="radio-item">
+                <input 
+                  type="radio" 
+                  name="tipo" 
+                  value="VETERINARIO" 
+                  v-model="tipo" 
+                />
+                <span class="custom-radio"></span>
+                VETERINARIO
+              </label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </template>
   
-  <script lang="ts">
-  import { defineComponent, ref } from 'vue';
-  import { useRouter } from 'vue-router';
-  
-  export default defineComponent({
-    name: 'SignUp',
-    setup() {
-      const router = useRouter();
-      const nome = ref('');
-      const sobrenome = ref('');
-      const email = ref('');
-      const senha = ref('');
-      const confirmarSenha = ref('');
-  
-      const cadastrar = () => {
-        if (
-          nome.value &&
-          sobrenome.value &&
-          email.value &&
-          senha.value &&
-          confirmarSenha.value
-        ) {
-          if (senha.value === confirmarSenha.value) {
-            // Aqui você pode adicionar a lógica para cadastrar o usuário
-            console.log(`Nome: ${nome.value}, Sobrenome: ${sobrenome.value}, Email: ${email.value}, Senha: ${senha.value}`);
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import apiClient from '../services/api';
+
+export default defineComponent({
+  name: 'SignUp',
+  setup() {
+    const router = useRouter();
+    const nome = ref('');
+    const sobrenome = ref('');
+    const email = ref('');
+    const senha = ref('');
+    const confirmarSenha = ref('');
+    const tipo = ref('');
+
+    const cadastrar = async () => {
+      if (
+        nome.value &&
+        sobrenome.value &&
+        email.value &&
+        senha.value &&
+        confirmarSenha.value &&
+        tipo.value
+      ) {
+        if (senha.value === confirmarSenha.value) {
+          try {
+            // Usando o apiClient para fazer a requisição
+            const response = await apiClient.post('/users/registrar', {
+              nome: nome.value,
+              sobrenome: sobrenome.value,
+              email: email.value,
+              senha: senha.value,
+              confirmarSenha: confirmarSenha.value,
+              tipo: tipo.value
+            });
+
+            console.log(response.data); // Dados retornados pelo backend
             alert('Conta criada com sucesso!');
-            // Redirecionar para a página de login após o cadastro
-            router.push('/');
-          } else {
-            alert('As senhas não correspondem.');
+            router.push('/'); // Redireciona para a página de login
+          } catch (error: any) {
+            console.error(error);
+            if (error.response && error.response.data) {
+              const mensagens = Object.values(error.response.data);
+              const mensagemFinal = mensagens.join('\n');
+              alert(`Erro: \n${mensagemFinal}`);
+            } else {
+              alert('Erro ao criar conta. Tente novamente mais tarde.');
+            }
           }
         } else {
-          alert('Por favor, preencha todos os campos.');
+          alert('As senhas não correspondem.');
         }
-      };
+      } else {
+        alert('Por favor, preencha todos os campos.');
+      }
+    };
+
+    return {
+      nome,
+      sobrenome,
+      email,
+      senha,
+      confirmarSenha,
+      tipo,
+      cadastrar,
+    };
+  },
+});
+</script>
   
-      return {
-        nome,
-        sobrenome,
-        email,
-        senha,
-        confirmarSenha,
-        cadastrar,
-      };
-    },
-  });
-  </script>
+
   
   <style scoped>
   .login-container {
@@ -747,6 +802,74 @@
     .login-text23 {
       width: 100%;
     }
+  }
+
+  .home-sexo {
+    top: 139px;
+    left: 236px;
+    width: 203px;
+    height: 47px;
+  }
+
+  .home-validadedo-laudo2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 0 8px;
+  }
+
+  .home-text21 {
+    color: rgba(123, 123, 123, 1);
+    font-size: 16px;
+    font-weight: 500;
+    font-family: Inter, sans-serif;
+    text-align: left;
+  }
+
+  .radio-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-left: 9px;
+    margin-top: 29px;
+  }
+
+  .radio-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .radio-item input[type="radio"] {
+    display: none;
+  }
+
+  .custom-radio {
+    width: 22px;
+    height: 22px;
+    background-color: #d9d9d9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+  }
+
+  .custom-radio::after {
+    content: '';
+    width: 13px;
+    height: 13px;
+    background-color: transparent;
+    border-radius: 50%;
+    transform: scale(1);
+    transition: background-color 0.3s, transform 0.3s;
+  }
+
+  input[type="radio"]:checked + .custom-radio::after {
+    background-color: #54562f;
+    transform: scale(1.2);
   }
   </style>
   
