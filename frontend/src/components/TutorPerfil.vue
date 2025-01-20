@@ -93,7 +93,10 @@
   
       const sair = () => {
         // Lógica para sair
-        alert('Você saiu da conta.');
+        // alert('Você saiu da conta.');
+        // router.push('/');
+        sessionStorage.removeItem('authToken');
+        alert('Você saiu com sucesso!');
         router.push('/');
       };
   

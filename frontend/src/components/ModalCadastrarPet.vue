@@ -1,94 +1,206 @@
+<!-- src/components/ModalCadastrarPet.vue -->
 <template>
-    <div v-if="isVisible" class="modal-overlay">
-        <div class="home-container">
-        <div class="home-cadastrarpet">
-            <div class="home-formulrio">
-            <div class="home-assinatura1">
-                <div class="home-assinatura2">
-                <span class="home-text10">Peso</span>
-                </div>
-                <input class="home-text11" placeholder="Digite aqui..." />
+  <div v-if="isVisible" class="modal-overlay">
+    <div class="home-container">
+      <div class="home-cadastrarpet">
+        <div class="home-formulrio">
+          <!-- Campo: Peso -->
+          <div class="home-assinatura1">
+            <div class="home-assinatura2">
+              <span class="home-text10">Peso</span>
             </div>
-            <div class="home-sintomas1">
-                <div class="home-sintomas2">
-                <span class="home-text12">Espécie</span>
-                </div>
-                <input class="home-text13" placeholder="Digite aqui..." />
-            </div>
-            <div class="home-validade1">
-                <div class="home-texto1">
-                <span class="home-text14">Nome</span>
-                </div>
-                <input class="home-text15" placeholder="Digite aqui..." />
-            </div>
-            <div class="home-validade2">
-                <div class="home-texto2">
-                <span class="home-text16">Nome do(a) tutor(a)</span>
-                </div>
-                <span class="home-text17">Giovanna Batista</span>
-            </div>
-            <span class="home-text18">voltar</span>
-            <div class="home-validade3">
-                <div class="home-validadedo-laudo1">
-                <span class="home-text19">Data de nascimento</span>
-                </div>
-                <input class="home-text20" placeholder="DD/MM/AAAA" />
-                <img
-                src="../assets/search12323-rndnw.svg"
-                alt="calendarweeksvgrepocom12991"
-                class="home-calendarweeksvgrepocom1"
-                />
-            </div>
-            <div class="home-sexo">
-                <div class="home-validadedo-laudo2">
-                <span class="home-text21">Sexo</span>
-                </div>
-                <div class="radio-group">
-                <label class="radio-item">
-                    <input type="radio" name="sexo" value="fêmea" />
-                    <span class="custom-radio"></span>
-                    Fêmea
-                </label>
-                <label class="radio-item">
-                    <input type="radio" name="sexo" value="macho" />
-                    <span class="custom-radio"></span>
-                    Macho
-                </label>
-                </div>
-            </div>
-            <div class="home-botopadro">
-                <div class="home-boto">
-                <span class="home-text24">CADASTRAR</span>
-                </div>
-            </div>
-            </div>
-            <div class="home-frame14">
-            <img
-                src="../assets/search12323-rndnw.svg"
-                alt="editsvgrepocom12991"
-                class="home-editsvgrepocom1"
+            <input 
+              v-model="peso" 
+              class="home-text11" 
+              placeholder="Digite aqui..." 
+              type="number" 
+              min="0" 
+              step="0.1"
             />
+          </div>
+
+          <!-- Campo: Espécie -->
+          <div class="home-sintomas1">
+            <div class="home-sintomas2">
+              <span class="home-text12">Espécie</span>
             </div>
+            <input 
+              v-model="especie" 
+              class="home-text13" 
+              placeholder="Digite aqui..." 
+              type="text" 
+            />
+          </div>
+
+          <!-- Campo: Nome do Pet -->
+          <div class="home-validade1">
+            <div class="home-texto1">
+              <span class="home-text14">Nome</span>
+            </div>
+            <input 
+              v-model="nomePet" 
+              class="home-text15" 
+              placeholder="Digite aqui..." 
+              type="text" 
+            />
+          </div>
+
+          <!-- Campo: Nome do Tutor (Pré-preenchido) -->
+          <div class="home-validade2">
+            <div class="home-texto2">
+              <span class="home-text16">Nome do(a) tutor(a)</span>
+            </div>
+            <span class="home-text17">{{ nomeTutor }}</span>
+          </div>
+
+          <!-- Botão "Voltar" -->
+          <span class="home-text18" @click="closeModal">voltar</span>
+
+          <!-- Campo: Data de Nascimento -->
+          <div class="home-validade3">
+            <div class="home-validadedo-laudo1">
+              <span class="home-text19">Data de nascimento</span>
+            </div>
+            <input 
+              v-model="dataNascimento" 
+              class="home-text20" 
+              placeholder="DD/MM/AAAA" 
+              type="date" 
+            />
+            <img
+              src="../assets/search12323-rndnw.svg"
+              alt="calendarweeksvgrepocom12991"
+              class="home-calendarweeksvgrepocom1"
+            />
+          </div>
+
+          <!-- Campo: Sexo -->
+          <div class="home-sexo">
+            <div class="home-validadedo-laudo2">
+              <span class="home-text21">Sexo</span>
+            </div>
+            <div class="radio-group">
+              <label class="radio-item">
+                <input 
+                  type="radio" 
+                  name="sexo" 
+                  value="Fêmea" 
+                  v-model="sexo" 
+                />
+                <span class="custom-radio"></span>
+                Fêmea
+              </label>
+              <label class="radio-item">
+                <input 
+                  type="radio" 
+                  name="sexo" 
+                  value="Macho" 
+                  v-model="sexo" 
+                />
+                <span class="custom-radio"></span>
+                Macho
+              </label>
+            </div>
+          </div>
+
+          <!-- Botão "Cadastrar" -->
+          <div class="home-botopadro">
+            <button class="home-boto" @click="cadastrarPet">
+              <span class="home-text24">CADASTRAR</span>
+            </button>
+          </div>
         </div>
+
+        <div class="home-frame14">
+          <img
+            src="../assets/search12323-rndnw.svg"
+            alt="editsvgrepocom12991"
+            class="home-editsvgrepocom1"
+          />
         </div>
+      </div>
     </div>
-  </template>
+  </div>
+</template>
+
   
-  <script>
-  export default {
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+import apiClient from '../services/api'; // Certifique-se de que o caminho está correto
+
+export default defineComponent({
+  name: 'ModalCadastrarPet',
   props: {
     isVisible: {
       type: Boolean,
       required: true,
     },
-  },
-  methods: {
-    closeModal() {
-      this.$emit('close');
+    nomeTutor: {
+      type: String,
+      required: true,
     },
   },
-};
-  </script>
+  setup(props, { emit }) {
+    // Propriedades reativas para os campos do formulário
+    const peso = ref<number | null>(null);
+    const especie = ref<string>('');
+    const nomePet = ref<string>('');
+    const dataNascimento = ref<string>('');
+    const sexo = ref<string>('');
+
+    // Método para fechar o modal
+    const closeModal = () => {
+      emit('close');
+    };
+
+    // Método para cadastrar o pet
+    const cadastrarPet = async () => {
+      // Validações básicas
+      if (!peso.value || !especie.value || !nomePet.value || !dataNascimento.value || !sexo.value) {
+        alert('Por favor, preencha todos os campos.');
+        return;
+      }
+
+      try {
+        const response = await apiClient.post('/pets', {
+          nome: nomePet.value,
+          tipo: especie.value,
+          sexo: sexo.value,
+          peso: peso.value,
+          dataNascimento: dataNascimento.value
+        });
+
+        console.log(response.data); // Dados retornados pelo backend
+        alert('Pet cadastrado com sucesso!');
+        emit('add-pet', response.data); // Emite o evento para adicionar o pet na lista do componente pai
+        closeModal(); // Fecha o modal após o cadastro
+      } catch (error: any) {
+        console.error(error);
+        if (error.response && error.response.data) {
+          const mensagens = Object.values(error.response.data);
+          const mensagemFinal = mensagens.join('\n');
+          alert(`Erro: \n${mensagemFinal}`);
+        } else {
+          alert('Erro ao cadastrar pet. Tente novamente mais tarde.');
+        }
+        closeModal();
+      }
+    };
+
+    return {
+      peso,
+      especie,
+      nomePet,
+      dataNascimento,
+      sexo,
+      closeModal,
+      cadastrarPet,
+    };
+  },
+});
+</script>
+
+
   
   <style scoped>
   .modal-overlay {
@@ -728,4 +840,3 @@
     color: #444444;
   }
   </style>
-  

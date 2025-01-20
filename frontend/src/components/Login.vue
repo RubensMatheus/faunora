@@ -23,20 +23,20 @@
           </div>
           <div class="login-svg-repoicon-carrier">
             <img
-              :src="vector1869"
+              :src="vector18"
               alt="Vector1869"
               class="login-vector"
             />
           </div>
-          <input class="login-text22" placeholder="lupita123" type="password" />
+          <input v-model="senha" class="login-text22" placeholder="lupita123" type="password" />
         </div>
         <div class="login-email">
           <div class="login-texto2">
             <span class="login-text18">Email</span>
           </div>
-          <input class="login-text19" placeholder="example@example.com" type="email" />
+          <input v-model="email" class="login-text19" placeholder="example@example.com" type="email" />
         </div>
-        <span class="login-text20">entrar</span>
+        <span class="login-text20">Login</span>
         <div class="login-botopadrofontemaior" @click="handleLogin">
           <div class="login-boto">
             <span class="login-text21">ENTRAR</span>
@@ -47,23 +47,56 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import vector1869 from '../assets/vector1869-ka0j.svg';
-import { RouterLink } from 'vue-router';
+<script lang="ts"> 
+import { defineComponent, ref } from 'vue';
+import vector18 from '../assets/vector1869-ka0j.svg'
+import { useRouter } from 'vue-router';
+import apiClient from '../services/api';
 
 export default defineComponent({
   name: 'Login',
   data() {
     return {
-      vector1869,
+      vector18
     };
   },
-  methods: {
-    handleLogin() {
-      // Implementar lógica de login aqui
-      alert('Botão de login clicado!');
-    },
+  setup() {
+    const email = ref('');
+    const senha = ref('');
+    const router = useRouter();
+
+    const handleLogin = async () => {
+      if (email.value && senha.value) {
+        // Aqui você implementaria a lógica para autenticação
+        try {
+          const response = await apiClient.post('/users/login', {
+            email: email.value,
+            senha: senha.value,
+          });
+          
+          const { message, token, userTipo} = response.data;
+          sessionStorage.setItem('authToken', token);
+          sessionStorage.setItem('userTipo', userTipo);
+          
+          if (userTipo === 'TUTOR') {
+            router.push('/home-tutor');
+          } else if (userTipo === 'VETERINARIO') {
+            router.push('/home-vet');
+          }
+        } catch (error: any){
+          console.error(error);
+          alert('Erro ao realizar login. Verifique suas credenciais.');
+        }
+      } else {
+        alert('Por favor, preencha todos os campos.');
+      }
+    };
+
+    return {
+      email,
+      senha,
+      handleLogin,
+    };
   },
 });
 </script>

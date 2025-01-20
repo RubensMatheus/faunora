@@ -73,9 +73,10 @@
       };
   
       const sair = () => {
-        // Lógica para sair
-        alert('Você saiu da conta.');
-        router.push('/'); // Atualize a rota conforme necessário
+        sessionStorage.removeItem('authToken');
+        sessionStorage.removeItem('userTipo');
+        alert('Você saiu com sucesso!');
+        router.push('/');
       };
   
       return {
