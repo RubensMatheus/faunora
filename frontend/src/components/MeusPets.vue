@@ -23,7 +23,7 @@
       </div>
 
       <!-- Títulos e Descrições -->
-      <span class="meuspets-text11">Meu Pets</span>
+      <span class="meuspets-text11">Meus Pets</span>
       <span class="meuspets-text12">
         Confira aqui os perfis de todos os seus pets cadastrados no nosso sistema!
       </span>
@@ -57,12 +57,12 @@
           alt="Line Separator"
           class="meuspets-line1"
         />
-        <span class="meuspets-text21" @click="navegar('Perfil')">Perfil</span>
-        <span class="meuspets-text20" @click="navegar('Consultas')">Consultas</span>
-        <span class="meuspets-text19" @click="navegar('Vacinas')">Vacinas</span>
-        <span class="meuspets-text18" @click="navegar('Exames')">Exames</span>
+        <span class="meuspets-text21" @click="navegar('tutor')">Perfil</span>
+        <span class="meuspets-text20" @click="navegar('consultas-tutor')">Consultas</span>
+        <span class="meuspets-text19" @click="navegar('vacina-tutor')">Vacinas</span>
+        <span class="meuspets-text18" @click="navegar('exames-tutor')">Exames</span>
         <span class="meuspets-text17" @click="navegar('Produtos')">Produtos</span>
-        <span class="meuspets-text16" @click="navegar('Meus Pets')">Meus Pets</span>
+        <span class="meuspets-text16" @click="navegar('meus-pets')">Meus Pets</span>
         <div class="meuspets-logo">
           <div class="meuspets-frame20"></div>
           <div class="meuspets-frame24"></div>
@@ -240,12 +240,12 @@ export default defineComponent({
 
     const verExamesProximos = () => {
       alert('Redirecionando para exames próximos...');
-      router.push('/exames-proximos');
+      router.push('/exames-tutor');
     };
 
     const verVacinasProximas = () => {
       alert('Redirecionando para vacinas próximas...');
-      router.push('/vacinas-proximas');
+      router.push('/vacinas-tutor');
     };
 
     const filterPets = () => {
@@ -296,7 +296,7 @@ export default defineComponent({
 .meuspets-frame6 {
   top: 136px;
   left: 0px;
-  width: 1440px;
+  width: 100%;
   height: 556px;
   display: flex;
   overflow: hidden;
@@ -307,8 +307,8 @@ export default defineComponent({
 }
 
 .meuspets-search-bar {
-  top: 495px;
-  left: 553px;
+  top: 595px;
+  left: 50em;
   width: 335px;
   height: 40px;
   display: flex;
@@ -352,6 +352,7 @@ export default defineComponent({
   font-weight: 700;
   text-align: center;
   position: absolute;
+  margin-top: 2.3em;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -364,6 +365,7 @@ export default defineComponent({
   font-weight: 500;
   text-align: center;
   position: absolute;
+  margin-top: 18em;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -377,8 +379,8 @@ export default defineComponent({
 }
 
 .meuspets-boto10 {
-  top: 444px;
-  left: 601px;
+  top: 544px;
+  left: 53em;
   width: 239px;
   height: 42px;
   display: flex;
@@ -432,9 +434,11 @@ export default defineComponent({
   color: rgba(67, 67, 67, 1);
   font-size: 24px;
   font-weight: 500;
-  text-align: left;
+  text-align: center;
+  padding-top: 0.5em;
+  margin-left: 7em;
+  display: flex;
   cursor: pointer;
-  position: absolute;
 }
 
 .meuspets-text16:hover,
@@ -449,13 +453,12 @@ export default defineComponent({
 .meuspets-navbarcliente {
   top: 0px;
   left: 0px;
-  width: 1440px;
+  width: 100%;
   height: 136px;
   display: flex;
-  overflow: hidden;
-  position: absolute;
-  align-items: flex-start;
-  flex-shrink: 0;
+  position: fixed;
+  align-items: center;
+  justify-content: space-between;
   background-color: rgba(255, 255, 255, 1);
 }
 
@@ -477,12 +480,11 @@ export default defineComponent({
 }
 
 .meuspets-logo {
-  top: 34px;
-  left: 95px;
+  padding-top: 1em;
   width: 48px;
   height: 68px;
   display: flex;
-  position: absolute;
+  /* position: absolute; */
   align-items: flex-start;
   flex-shrink: 0;
 }
@@ -499,8 +501,8 @@ export default defineComponent({
 }
 
 .meuspets-frame20 {
-  top: 0px;
-  left: 0px;
+  top: 30px;
+  left: 30px;
   width: 24px;
   height: 22px;
   border-radius: 100px 0 0 100px;
@@ -508,8 +510,8 @@ export default defineComponent({
 }
 
 .meuspets-frame24 {
-  top: 0px;
-  left: 24px;
+  top: 30px;
+  left: 54px;
   width: 24px;
   height: 22px;
   border-radius: 0 100px 100px 0;
@@ -517,8 +519,8 @@ export default defineComponent({
 }
 
 .meuspets-frame21 {
-  top: 22px;
-  left: 0px;
+  top: 52px;
+  left: 30px;
   width: 24px;
   height: 24px;
   border-radius: 100px 0 0 100px;
@@ -526,8 +528,8 @@ export default defineComponent({
 }
 
 .meuspets-frame23 {
-  top: 22px;
-  left: 24px;
+  top: 52px;
+  left: 54px;
   width: 24px;
   height: 24px;
   border-radius: 100px;
@@ -535,8 +537,8 @@ export default defineComponent({
 }
 
 .meuspets-frame22 {
-  top: 46px;
-  left: 0px;
+  top: 76px;
+  left: 30px;
   width: 24px;
   height: 22px;
   border-radius: 100px 0 100px 100px;
@@ -544,13 +546,12 @@ export default defineComponent({
 }
 
 .meuspets-botopadrofontemaior {
-  top: 41px;
-  left: 1256px;
+  margin-top: 0.5em;
+  margin-right: 10em;
   width: 89px;
   height: 53px;
   display: flex;
-  position: absolute;
-  align-items: flex-start;
+  align-items: center;
   flex-shrink: 0;
 }
 
@@ -574,18 +575,20 @@ export default defineComponent({
 }
 
 .meuspets-card {
-  top: 810px;
-  left: 119px; /* Será ajustado dinamicamente */
   width: 170px;
   height: 268px;
+  margin-top: 53em;
   display: flex;
-  position: absolute;
-  align-items: flex-start;
+  position: relative;
+  padding: 5em;
+  margin-left: 14em;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
 
 .meuspets-text23 {
-  top: 179px;
+  margin-top: 4em;
   color: rgba(84, 86, 47, 1);
   font-size: 24px;
   font-weight: 700;
@@ -674,7 +677,7 @@ export default defineComponent({
 .meuspets-frame31 {
   top: 1152px;
   left: 0px;
-  width: 1440px;
+  width: 100%;
   height: 100px;
   display: flex;
   overflow: hidden;
@@ -776,7 +779,6 @@ export default defineComponent({
   .meuspets-text18,
   .meuspets-text17,
   .meuspets-text16 {
-    left: 50%;
     transform: translateX(-50%);
     margin-bottom: 10px;
   }
@@ -790,7 +792,6 @@ export default defineComponent({
   .meuspets-botopadrofontemaior {
     left: 50%;
     transform: translateX(-50%);
-    margin-top: 10px;
   }
 
   .meuspets-card {
