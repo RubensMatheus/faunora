@@ -1,30 +1,13 @@
+<template>
+  <div id="app">
+    <router-view />
+  </div>
+</template>
+
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
-import apiClient from './services/api';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-    setup() {
-        const pets = ref<string[]>([]);
-
-        onMounted(async () => {
-            try {
-                const response = await apiClient.get('/pets');
-                pets.value = response.data;
-            } catch (error) {
-                console.error('Erro ao buscar pets:', error);
-            }
-        });
-
-        return { pets };
-    },
+  name: 'App',
 });
 </script>
-
-<template>
-    <div>
-        <h1>Pets</h1>
-        <ul>
-            <li v-for="pet in pets" :key="pet">{{ pet }}</li>
-        </ul>
-    </div>
-</template>
