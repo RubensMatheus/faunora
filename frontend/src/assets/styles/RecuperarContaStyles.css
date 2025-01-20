@@ -1,75 +1,5 @@
-<template>
-  <div class="login-container">
-    <div class="login-login">
-      <div class="login-logo">
-        <div class="login-frame20"></div>
-        <div class="login-frame24"></div>
-        <div class="login-frame21"></div>
-        <div class="login-frame23"></div>
-        <div class="login-frame22"></div>
-      </div>
-      <div class="login-frame37">
-        <span class="login-text10">
-          <span class="login-text11">não tem uma conta?</span>
-          <router-link to="/cadastro" class="login-text23">cadastre-se</router-link>
-        </span>
-        <span class="login-text13">
-          <span class="login-text14">esqueceu sua senha?</span>
-          <router-link to="/recuperar-conta" class="login-text23">clique aqui</router-link>
-        </span>
-        <div class="login-senha">
-          <div class="login-texto1">
-            <span class="login-text16">Senha</span>
-          </div>
-          <div class="login-svg-repoicon-carrier">
-            <img
-              :src="vector1869"
-              alt="Vector1869"
-              class="login-vector"
-            />
-          </div>
-          <input class="login-text22" placeholder="lupita123" type="password" />
-        </div>
-        <div class="login-email">
-          <div class="login-texto2">
-            <span class="login-text18">Email</span>
-          </div>
-          <input class="login-text19" placeholder="example@example.com" type="email" />
-        </div>
-        <span class="login-text20">entrar</span>
-        <div class="login-botopadrofontemaior" @click="handleLogin">
-          <div class="login-boto">
-            <span class="login-text21">ENTRAR</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-import vector1869 from '../assets/vector1869-ka0j.svg';
-import { RouterLink } from 'vue-router';
-
-export default defineComponent({
-  name: 'Login',
-  data() {
-    return {
-      vector1869,
-    };
-  },
-  methods: {
-    handleLogin() {
-      // Implementar lógica de login aqui
-      alert('Botão de login clicado!');
-    },
-  },
-});
-</script>
-  
-  <style scoped>
-  .login-container {
+/* Reset CSS */
+.recuperarconta-container {
     width: 100%;
     display: flex;
     overflow: auto;
@@ -78,7 +8,7 @@ export default defineComponent({
     flex-direction: column;
   }
   
-  .login-login {
+  .recuperarconta-redefinirsenha {
     width: 100%;
     height: 1024px;
     display: flex;
@@ -89,8 +19,8 @@ export default defineComponent({
     background-color: rgba(255, 255, 255, 1);
   }
   
-  .login-logo {
-    top: 60px;
+  .recuperarconta-logo {
+    top: 27px;
     left: 43px;
     width: 48px;
     height: 68px;
@@ -100,7 +30,7 @@ export default defineComponent({
     flex-shrink: 0;
   }
   
-  .login-frame20 {
+  .recuperarconta-frame20 {
     top: 0px;
     left: 0px;
     width: 24px;
@@ -114,7 +44,7 @@ export default defineComponent({
     background-color: rgba(71, 92, 54, 1);
   }
   
-  .login-frame24 {
+  .recuperarconta-frame24 {
     top: 0px;
     left: 24px;
     width: 24px;
@@ -128,7 +58,7 @@ export default defineComponent({
     background-color: rgba(146, 151, 129, 1);
   }
   
-  .login-frame21 {
+  .recuperarconta-frame21 {
     top: 22px;
     left: 0px;
     width: 24px;
@@ -142,7 +72,7 @@ export default defineComponent({
     background-color: rgba(151, 166, 126, 1);
   }
   
-  .login-frame23 {
+  .recuperarconta-frame23 {
     top: 22px;
     left: 24px;
     width: 24px;
@@ -156,7 +86,7 @@ export default defineComponent({
     background-color: rgba(74, 94, 56, 1);
   }
   
-  .login-frame22 {
+  .recuperarconta-frame22 {
     top: 46px;
     left: 0px;
     width: 24px;
@@ -170,59 +100,38 @@ export default defineComponent({
     background-color: rgba(55, 70, 40, 1);
   }
   
-  .login-frame37 {
-    top: 314px;
-    left: 50%;
-    transform: translateX(-50%);
+  .recuperarconta-frame36 {
+    top: 326px;
+    left: 500px;
     width: 440px;
-    height: 397px;
+    height: 373px;
     display: flex;
     position: absolute;
     align-items: flex-start;
     flex-shrink: 0;
   }
   
-  .login-text10 {
-    top: 287px;
-    color: rgba(123, 123, 123, 1);
-    height: auto;
-    position: absolute;
-    font-size: 16px;
-    font-style: Regular;
-    text-align: left;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    line-height: normal;
-    font-stretch: normal;
-    text-decoration: none;
-  }
-  
-  .login-text11 {
-    color: rgba(123, 123, 123, 1);
-    font-weight: 400;
-  }
-  
-  .login-text13 {
+  .recuperarconta-text1 {
     top: 263px;
     color: rgba(123, 123, 123, 1);
     height: auto;
     position: absolute;
     font-size: 16px;
-    font-style: Regular;
+    font-style: regular;
     text-align: left;
-    font-family: 'Inter', sans-serif;
+    font-family: Inter, sans-serif;
     font-weight: 400;
     line-height: normal;
     font-stretch: normal;
     text-decoration: none;
   }
   
-  .login-text14 {
+  .recuperarconta-text2 {
     color: rgba(123, 123, 123, 1);
     font-weight: 400;
   }
   
-  .login-senha {
+  .recuperarconta-confirmarsenha {
     top: 198px;
     left: 0px;
     width: 440px;
@@ -237,11 +146,11 @@ export default defineComponent({
     border-radius: 8px;
   }
   
-  .login-texto1 {
+  .recuperarconta-texto1 {
     gap: 8px;
     top: -10px;
     left: 20px;
-    width: 64px;
+    width: 186px;
     display: flex;
     padding: 0 8px;
     position: absolute;
@@ -250,53 +159,56 @@ export default defineComponent({
     background-color: rgba(255, 255, 255, 1);
   }
   
-  .login-text16 {
+  .recuperarconta-text4 {
     color: rgba(123, 123, 123, 1);
     height: auto;
     font-size: 16px;
-    font-style: Medium;
+    font-style: medium;
     text-align: left;
-    font-family: 'Inter', sans-serif;
+    font-family: Inter, sans-serif;
     font-weight: 500;
     line-height: normal;
     font-stretch: normal;
     text-decoration: none;
   }
   
-  .login-svg-repoicon-carrier {
+  .recuperarconta-svg-repoicon-carrier1 {
     top: 18px;
     left: 407px;
-    width: 22.034px;
-    height: 15.15px;
+    width: 22px;
+    height: 15px;
     display: flex;
     position: absolute;
     align-items: flex-start;
     flex-shrink: 1;
   }
   
-  .login-vector {
+  .recuperarconta-vector1 {
+    top: 0px;
+    left: 0px;
     width: 22px;
     height: 15px;
+    position: absolute;
   }
   
-  .login-text17 {
+  .recuperarconta-text5 {
     top: 15.5px;
     left: 26px;
     color: rgba(67, 67, 67, 1);
     height: auto;
     position: absolute;
     font-size: 18px;
-    font-style: Medium;
+    font-style: medium;
     text-align: left;
     width: 360px;
-    font-family: 'Inter', sans-serif;
+    font-family: Inter, sans-serif;
     font-weight: 500;
     line-height: normal;
     font-stretch: normal;
     text-decoration: none;
   }
   
-  .login-email {
+  .recuperarconta-senha {
     top: 107px;
     left: 0px;
     width: 440px;
@@ -311,11 +223,11 @@ export default defineComponent({
     border-radius: 8px;
   }
   
-  .login-texto2 {
+  .recuperarconta-texto2 {
     gap: 8px;
     top: -9px;
     left: 18px;
-    width: 57px;
+    width: 107px;
     display: flex;
     padding: 0 8px;
     position: absolute;
@@ -324,55 +236,75 @@ export default defineComponent({
     background-color: rgba(255, 255, 255, 1);
   }
   
-  .login-text18 {
+  .recuperarconta-text6 {
     color: rgba(123, 123, 123, 1);
     height: auto;
     font-size: 16px;
-    font-style: Medium;
+    font-style: medium;
     text-align: left;
-    font-family: 'Inter', sans-serif;
+    font-family: Inter, sans-serif;
     font-weight: 500;
     line-height: normal;
     font-stretch: normal;
     text-decoration: none;
   }
   
-  .recuperarconta-text5 {
+  .recuperarconta-svg-repoicon-carrier2 {
+    top: 17px;
+    left: 407px;
+    width: 22px;
+    height: 15px;
+    display: flex;
+    position: absolute;
+    align-items: flex-start;
+    flex-shrink: 1;
+  }
+  
+  .recuperarconta-vector2 {
+    top: 0px;
+    left: 0px;
+    width: 22px;
+    height: 15px;
+    position: absolute;
+  }
+  
+  .recuperarconta-text7 {
     top: 15.5px;
     left: 26px;
     color: rgba(67, 67, 67, 1);
     height: auto;
     position: absolute;
     font-size: 18px;
-    font-style: Medium;
+    font-style: medium;
     text-align: left;
-    width: 360px;
-    font-family: 'Inter', sans-serif;
+    font-family: Inter, sans-serif;
     font-weight: 500;
     line-height: normal;
     font-stretch: normal;
     text-decoration: none;
   }
   
-  .login-text20 {
-    left: 145px;
-    color: rgba(67, 67, 67, 1);
+  .recuperarconta-text8 {
+    top: 0px;
+    left: 0px;
+    color: rgb(67, 67, 67);
+    right: 0px;
     height: auto;
+    margin: auto;
     position: absolute;
     font-size: 50px;
-    font-style: Bold;
+    font-style: bold;
     text-align: center;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-weight: 700;
     line-height: normal;
     font-stretch: normal;
     text-decoration: none;
   }
   
-  .login-botopadrofontemaior {
-    top: 352px;
-    left: 50%;
-    transform: translateX(-50%);
+  .recuperarconta-botopadrofontemaior {
+    top: 328px;
+    left: 70px;
     width: 300px;
     height: 45px;
     display: flex;
@@ -381,7 +313,9 @@ export default defineComponent({
     flex-shrink: 0;
   }
   
-  .login-boto {
+  .recuperarconta-boto {
+    top: 0px;
+    left: 0px;
     width: 300px;
     height: 45px;
     display: flex;
@@ -395,75 +329,49 @@ export default defineComponent({
     transition: background-color 0.3s ease;
   }
   
-  .login-text21 {
+  .recuperarconta-text9 {
     top: 9px;
-    left: 107px;
+    left: 85px;
     color: rgba(255, 249, 238, 1);
     height: auto;
     position: absolute;
     font-size: 22px;
-    font-style: Semi Bold;
+    font-style: semi bold;
     text-align: center;
-    font-family: 'Inter', sans-serif;
+    font-family: Inter, sans-serif;
     font-weight: 700;
     line-height: normal;
     font-stretch: normal;
     text-decoration: none;
   }
   
-  .login-boto:hover {
-    background-color: #373919;
-  }
-  
-  .login-text19 {
-    top: 15.5px;
-    left: 26px;
-    color: rgba(67, 67, 67, 1);
-    height: auto;
-    position: absolute;
-    font-size: 18px;
-    font-style: Medium;
-    text-align: left;
-    width: 390px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    line-height: normal;
-    font-stretch: normal;
-    text-decoration: none;
-  }
-  
-  .login-text22 {
-    top: 15.5px;
-    left: 26px;
-    color: rgba(67, 67, 67, 1);
-    height: auto;
-    position: absolute;
-    font-size: 18px;
-    font-style: Medium;
-    text-align: left;
-    width: 360px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    line-height: normal;
-    font-stretch: normal;
-    text-decoration: none;
-  }
-  
-  .login-text23 {
+  .recuperarconta-text10 {
     color: rgba(84, 86, 47, 1);
     height: auto;
     font-size: 16px;
-    font-style: Medium;
+    font-style: medium;
     text-align: left;
-    font-family: 'Inter', sans-serif;
+    font-family: Inter, sans-serif;
     font-weight: 700;
     line-height: normal;
     font-stretch: normal;
     text-decoration: none;
   }
   
-  .login-text23:hover {
+  .recuperarconta-text10:hover {
+    color: rgba(84, 86, 47, 1);
+    height: auto;
+    font-size: 16px;
+    font-style: medium;
+    text-align: left;
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    line-height: normal;
+    font-stretch: normal;
     text-decoration: underline;
   }
-  </style>
+  
+  .recuperarconta-boto:hover {
+    background-color: #373919;
+  }
   

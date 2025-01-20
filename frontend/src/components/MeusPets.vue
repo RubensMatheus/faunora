@@ -9,7 +9,6 @@
               class="meuspets-text10"
               placeholder="Procure por nome, idade, sexo..."
               v-model="searchQuery"
-              @input="filterPets"
             />
           </div>
           <img
@@ -228,7 +227,7 @@
   .meuspets-frame6 {
     top: 136px;
     left: 0px;
-    width: 1440px;
+    width: 100%;
     height: 556px;
     display: flex;
     overflow: hidden;
@@ -305,7 +304,7 @@
     top: 377px;
     left: 465px;
     color: rgba(255, 249, 238, 1);
-    width: 511px;
+    width: auto;
     height: auto;
     position: absolute;
     text-shadow: 0.5px 0.5px 3px rgba(0, 0, 0, 0.5);
