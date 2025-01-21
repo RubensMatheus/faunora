@@ -53,6 +53,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/meus-pets',
     name: 'MeusPets',
     component: MeusPets,
+    meta: { requiresAuth: true, role: 'TUTOR' },
   },
   {
     path: '/consultas-tutor',

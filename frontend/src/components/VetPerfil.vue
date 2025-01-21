@@ -11,6 +11,7 @@
             <div class="login-texto1">
               <span class="login-text13">Email</span>
             </div>
+            <router-link to="editar-email-vet">
             <div class="login-svg-repoicon-carrier1">
               <img
                 alt="Vector1861"
@@ -23,12 +24,14 @@
                 class="login-vector2"
               />
             </div>
+            </router-link>
             <span class="login-text14">{{ email }}</span>
           </div>
           <div class="login-nome">
             <div class="login-texto2">
               <span class="login-text15">Nome e sobrenome</span>
             </div>
+            <router-link to="editar-nome-vet">
             <div class="login-svg-repoicon-carrier2">
               <img
                 alt="Vector1861"
@@ -41,6 +44,7 @@
                 class="login-vector4"
               />
             </div>
+            </router-link>
             <span class="login-text16">{{ nomeCompleto }}</span>
           </div>
           <span class="login-text17">Visualizar Perfil</span>

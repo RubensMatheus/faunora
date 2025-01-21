@@ -84,7 +84,7 @@
                 <input 
                   type="radio" 
                   name="sexo" 
-                  value="Fêmea" 
+                  value="FEMINO" 
                   v-model="sexo" 
                 />
                 <span class="custom-radio"></span>
@@ -93,8 +93,8 @@
               <label class="radio-item">
                 <input 
                   type="radio" 
-                  name="sexo" 
-                  value="Macho" 
+                  name="sexo"
+                  value="MASCULINO" 
                   v-model="sexo" 
                 />
                 <span class="custom-radio"></span>
