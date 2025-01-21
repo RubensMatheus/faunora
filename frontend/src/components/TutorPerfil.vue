@@ -75,8 +75,9 @@
   </template>
   
   <script lang="ts">
-  import { defineComponent, ref } from 'vue';
+  import { defineComponent, ref, onMounted  } from 'vue';
   import { useRouter } from 'vue-router';
+  import apiClient from '../services/api';
   
   export default defineComponent({
     name: 'TutorPage',
@@ -84,21 +85,36 @@
       const router = useRouter();
       const email = ref('giovvbatista@gmail.com');
       const nomeCompleto = ref('Giovanna Batista');
-  
+
+      const resgatarUsuario = async () => {
+        try {
+          const userId = Number(sessionStorage.getItem('userID'));
+          const response = await apiClient.get(`/users/${userId}`);
+          const userData = response.data;
+          email.value = userData.email;
+          nomeCompleto.value = userData.nome;
+        } catch (error) {
+          console.error('Erro ao buscar o perfil do usuário:', error);
+          alert('Erro ao carregar o perfil do usuário. Tente novamente mais tarde.');
+        }
+      }
+
       const editarSenha = () => {
-        // Lógica para editar a senha
         alert('Redirecionando para a página de edição de senha...');
         router.push('/editar-senha');
       };
   
       const sair = () => {
-        // Lógica para sair
-        // alert('Você saiu da conta.');
-        // router.push('/');
         sessionStorage.removeItem('authToken');
+        sessionStorage.removeItem('userTipo');
+        sessionStorage.removeItem('userID');
         alert('Você saiu com sucesso!');
         router.push('/');
       };
+
+      onMounted(() => {
+        resgatarUsuario();
+      });
   
       return {
         email,

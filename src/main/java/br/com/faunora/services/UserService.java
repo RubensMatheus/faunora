@@ -55,7 +55,7 @@ public class UserService {
 
         String token = tokenService.generateToken(userModel);
 
-        return new LoginResponseRecordDto("login realizado com sucesso", token, userModel.getTipo());
+        return new LoginResponseRecordDto("login realizado com sucesso", token, userModel.getTipo(), userModel.getId());
     }
 
     public UserModel findById(Long id) {

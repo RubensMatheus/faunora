@@ -6,5 +6,6 @@ import jakarta.validation.constraints.NotBlank;
 public record LoginResponseRecordDto(
         @NotBlank String message,
         @NotBlank String token,
-        @NotBlank UserTipo userTipo) {
+        @NotBlank UserTipo userTipo,
+        @NotBlank Long id) {
 }

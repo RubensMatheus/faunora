@@ -74,9 +74,10 @@ export default defineComponent({
             senha: senha.value,
           });
           
-          const { message, token, userTipo} = response.data;
+          const { message, token, userTipo, id} = response.data;
           sessionStorage.setItem('authToken', token);
           sessionStorage.setItem('userTipo', userTipo);
+          sessionStorage.setItem('userID', id);
           
           if (userTipo === 'TUTOR') {
             router.push('/home-tutor');

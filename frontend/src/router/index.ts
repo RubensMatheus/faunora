@@ -41,11 +41,13 @@ const routes: Array<RouteRecordRaw> = [
     path: '/tutor',
     name: 'TutorPage',
     component: TutorPage,
+    meta: { requiresAuth: true, role: 'TUTOR' },
   },
   {
     path: '/vet',
     name: 'VetPage',
     component: VetPage,
+    meta: { requiresAuth: true, role: 'VETERINARIO' },
   },
   {
     path: '/meus-pets',
@@ -132,16 +134,6 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
-
-// router.beforeEach((to, from, next) => {
-//   const isAuthenticated = !!sessionStorage.getItem('authToken'); // Verifica se o token existe
-//   if (to.meta.requiresAuth && !isAuthenticated) {
-//     alert('Você precisa estar autenticado para acessar esta página.');
-//     next('/'); // Redireciona para o login
-//   } else {
-//     next(); // Permite a navegação
-//   }
-// });
 
 router.beforeEach((to, from, next) => {
   const token = sessionStorage.getItem('authToken');
