@@ -25,7 +25,6 @@ Certifique-se de ter instalado:
 - [Node.js](https://nodejs.org/)  
 - [Vue CLI](https://cli.vuejs.org/)  
 - [Java 17+](https://adoptium.net/)  
-- [Docker](https://www.docker.com/)  
 
 ### 🖥 **Rodando o Frontend**  
 
